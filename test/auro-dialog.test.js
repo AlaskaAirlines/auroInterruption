@@ -67,4 +67,24 @@ describe('auro-dialog', () => {
     await listener;
     expect(el.getAttribute('dialogOverlay--open')).to.equal(null);
   });
+
+  it('auro-dialog renders only a close icon', async () => {
+    const el = await fixture(html`
+      <auro-dialog blank></auro-dialog>
+    `);
+
+    const root = el.shadowRoot;
+    const title = root.querySelector('#dialog-close');
+    await expect(title).to.not.equal(null);
+  });
+
+  it('auro-dialog renders no close icon', async () => {
+    const el = await fixture(html`
+      <auro-dialog blank modal></auro-dialog>
+    `);
+
+    const root = el.shadowRoot;
+    const title = root.querySelector('#dialog-close');
+    await expect(title).to.equal(null);
+  });
 });

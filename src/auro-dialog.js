@@ -18,10 +18,12 @@ import closeIcon from '@alaskaairux/orion-icons/dist/icons/close-lg_es6.js';
  *
  * @attr {Boolean} modal - Modal dialog restricts the user to take an action (no default close actions)
  * @attr {Boolean} fixed - Uses fixed pixel values for element shape
+ * @attr {Boolean} blank - Blank dialog window, edge-to-edge fill for content
  * @attr {Boolean} sm - Sets dialog box to small style
  * @attr {Boolean} md - Sets dialog box to medium style
  * @attr {Boolean} sm lg - Sets dialog to sm for desktop and lg for mobile
  * @attr {Boolean} md lg - Sets dialog to md for desktop and lg for mobile
+ * @attr {Boolean} onDark - Sets close icon to white for dark backgrounds
  * @attr {Boolean} open - Sets state of dialog to open
  * @slot header - Text to display as the header of the modal
  * @slot content - Injects content into the body of the modal
@@ -60,10 +62,11 @@ class AuroDialog extends LitElement {
   static get properties() {
     return {
       modal: { type: Boolean },
+      blank: { type: Boolean },
       open:   {
         type: Boolean,
         reflect: true
-        }
+      }
     };
   }
 
@@ -73,10 +76,13 @@ class AuroDialog extends LitElement {
       slotWrapper = this.shadowRoot.querySelector("#footerWrapper");
 
     this.dialog = this.shadowRoot.getElementById('dialog');
-    this.slt = slot.assignedNodes();
 
-    if (this.slt.length === this.zero) {
-      return slotWrapper.classList.remove("dialog-footer");
+    if (!this.blank) {
+      this.slt = slot.assignedNodes();
+
+      if (this.slt.length === this.zero) {
+        return slotWrapper.classList.remove("dialog-footer");
+      }
     }
 
     return null
@@ -159,25 +165,41 @@ class AuroDialog extends LitElement {
       </div>
 
       <dialog id="dialog" @click=${this.display()} class="${classMap(contentClasses)}" aria-labelledby="dialog-header">
-        <div class="dialog-header">
-          <h1 class="heading heading--700 util_stackMarginNone--top" id="dialog-header">
-            <slot name="header">Default header ...</slot>
-          </h1>
+
+      ${this.blank
+        ? html`
+          <slot name="content"></slot>
           ${this.modal
             ? html``
             : html`
               <button class="dialog-header--action" id="dialog-close" @click="${this.toggleViewable}">
                 <div>${this.svg}</div>
-                <div class="util_displayHiddenVisually">Click me to close</div>
+                <div class="util_displayHiddenVisually">Click to close</div>
               </button>
-          `}
+            `
+          }
+        `
+        : html`<div class="dialog-header">
+        <h1 class="heading heading--700 util_stackMarginNone--top" id="dialog-header">
+          <slot name="header">Default header ...</slot>
+        </h1>
+        ${this.modal
+          ? html``
+          : html`
+            <button class="dialog-header--action" id="dialog-close" @click="${this.toggleViewable}">
+              <div>${this.svg}</div>
+              <div class="util_displayHiddenVisually">Click to close</div>
+            </button>
+          `
+        }
         </div>
         <div class="dialog-content">
           <slot name="content"></slot>
         </div>
         <div class="dialog-footer" id="footerWrapper">
           <slot name="footer" id="footer"></slot>
-        </div>
+        </div>`
+      }
       </dialog>
     `;
   }

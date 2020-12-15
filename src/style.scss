@@ -180,6 +180,12 @@ $auro-spacing-options: none;
   }
 }
 
+:host([blank]) {
+  .dialog {
+    padding: 0;
+  }
+}
+
 .dialog-header {
   display: flex;
   justify-content: space-between;
@@ -207,3 +213,23 @@ $auro-spacing-options: none;
   }
 }
 
+// sets dynamic placement of X based on padding specs
+:host([blank]) {
+  .dialog-header--action {
+    position: absolute;
+    top: var(--auro-size-xl);
+    right: var(--auro-size-xl);
+
+    @include auro_breakpoint--md {
+      top: var(--auro-size-xxxl);
+      right: var(--auro-size-xxxl);
+    }
+  }
+}
+
+// sets X from black to white
+:host([blank][onDark]) {
+  .dialog-header--action {
+    color: var(--auro-color-base-white);
+  }
+}

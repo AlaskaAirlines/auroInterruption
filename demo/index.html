@@ -24,6 +24,25 @@
     <div class="vertical-section-container">
       <h1>auro-dialog</h1>
 
+      <h2>auro-dialog blank example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#blank');">standard medium Dialog</button>
+
+          <link rel="stylesheet" type="text/css" href="../src/style-blank.css" />
+          <auro-dialog id="blank" blank md ondark>
+            <span slot="content">
+              <img style="display: block; width: 100%" src="https://cdn.pocket-lint.com/r/s/1200x/assets/images/147767-tv-feature-what-order-should-you-watch-all-the-star-wars-films-image1-1wdfjceytb.jpg">
+              <div class="blankWrapper">
+                <h1 id="dialog-header">This is a header</h1>
+                These are some words that I want to put in here.
+              </div>
+            </span>
+
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
       <h2>auro-dialog md(desktop) lg(mobile) example</h2>
       <demo-snippet>
         <template>
