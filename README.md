@@ -1,4 +1,4 @@
-# auro-dialog
+# auro-interruption
 
 `<auro-dialog>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for displaying content to a user in both a blocking (requiring user action other than clicking close, like a confirmation message) and non-blocking (user can close, like an upsell).
 
@@ -13,7 +13,7 @@ For the most up to date information on [UI development browser support](https://
 [![License](https://img.shields.io/npm/l/@alaskaairux/auro-dialog?color=blue&style=for-the-badge)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ```shell
-$ npm i @alaskaairux/auro-dialog
+$ npm i @alaskaairux/auro-interruption
 ```
 
 Installing as a direct, dev or peer dependency is up to the user installing the package. If you are unsure as to what type of dependency you should use, consider reading this [stack overflow](https://stackoverflow.com/questions/18875674/whats-the-difference-between-dependencies-devdependencies-and-peerdependencies) answer.
@@ -33,7 +33,7 @@ Any update to the Auro Design Tokens will be immediately reflected with browsers
 Defining the component dependency within each component that is using the `<auro-dialog>` component.
 
 ```javascript
-import "@alaskaairux/auro-dialog";
+import "@alaskaairux/auro-interruption/dist/auro-dialog";
 ```
 
 **Reference component in HTML**

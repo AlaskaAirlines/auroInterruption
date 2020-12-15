@@ -2,10 +2,10 @@ repository:
   # See https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#edit for all available settings.
 
   # A short description of the repository that will show up on GitHub
-  description: Custom HTML <auro-dialog> element represents a dialog box or other interactive component, such as a dismissable alert, inspector, or subwindow.
+  description: Custom HTML <auro-dialog> element represents a dialog box or other interactive component, such as a dismissible alert, inspector, or sub-window.
 
   # A URL with more information about the repository
-  homepage: https://auro.alaskaair.com/components/auro/dialog
+  homepage: https://auro.alaskaair.com/components/auro/interruption
 
   # Either `true` to enable issues for this repository, `false` to disable them.
   has_issues: true
