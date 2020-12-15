@@ -24,6 +24,44 @@
     <div class="vertical-section-container">
       <h1>auro-dialog</h1>
 
+      <h2>auro-dialog md(desktop) lg(mobile) example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#mediumLarge');">mediumLarge Dialog</button>
+          <button onclick="fireDemo('#medium');">standard medium Dialog</button>
+
+          <auro-dialog id="mediumLarge" md lg>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#mediumLarge');">Close</button>
+            </span>
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
+      <h2>auro-dialog sm(desktop) lg(mobile) example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#smallLarge');">smallLarge Dialog</button>
+          <button onclick="fireDemo('#small');">standard small Dialog</button>
+
+          <auro-dialog id="smallLarge" sm lg>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#smallLarge');">Close</button>
+            </span>
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
       <h2>auro-dialog sm example</h2>
       <demo-snippet>
         <template>

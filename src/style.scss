@@ -106,6 +106,19 @@ $auro-spacing-options: none;
   }
 }
 
+:host([sm][lg]),
+:host([md][lg]) {
+  .dialog {
+    max-height: 90%;
+  }
+
+  @include auro_breakpoint--md {
+    .dialog {
+      max-height: 80%;
+    }
+  }
+}
+
 // Default selector setting mobile-first specs
 .dialog {
 

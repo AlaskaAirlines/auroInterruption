@@ -4,10 +4,11 @@ auro-dialog appear above the page and require the user's attention.
 
 ## Attributes
 
-| Attribute | Type      | Description                     |
-|-----------|-----------|---------------------------------|
-| `md`      | `Boolean` | Sets dialog box to medium style |
-| `sm`      | `Boolean` | Sets dialog box to small style  |
+| Attribute | Type      | Description                               |
+|-----------|-----------|-------------------------------------------|
+| `fixed`   | `Boolean` | Uses fixed pixel values for element shape |
+| `md`      | `Boolean` | Sets dialog box to medium style           |
+| `sm`      | `Boolean` | Sets dialog box to small style            |
 
 ## Properties
 

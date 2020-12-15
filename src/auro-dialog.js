@@ -17,8 +17,11 @@ import closeIcon from '@alaskaairux/orion-icons/dist/icons/close-lg_es6.js';
  * auro-dialog appear above the page and require the user's attention.
  *
  * @attr {Boolean} modal - Modal dialog restricts the user to take an action (no default close actions)
+ * @attr {Boolean} fixed - Uses fixed pixel values for element shape
  * @attr {Boolean} sm - Sets dialog box to small style
  * @attr {Boolean} md - Sets dialog box to medium style
+ * @attr {Boolean} sm lg - Sets dialog to sm for desktop and lg for mobile
+ * @attr {Boolean} md lg - Sets dialog to md for desktop and lg for mobile
  * @attr {Boolean} open - Sets state of dialog to open
  * @slot header - Text to display as the header of the modal
  * @slot content - Injects content into the body of the modal
