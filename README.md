@@ -1,6 +1,6 @@
 # auro-interruption
 
-`<auro-dialog>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for displaying content to a user in both a blocking (requiring user action other than clicking close, like a confirmation message) and non-blocking (user can close, like an upsell).
+`<auro-dialog>` is part of a family of [HTML custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for displaying content to a user in both a dialog and modal-dialog format.
 
 ## UI development browser support
 
@@ -8,9 +8,9 @@ For the most up to date information on [UI development browser support](https://
 
 ## Install
 
-[![Build Status](https://img.shields.io/github/workflow/status/AlaskaAirlines/auro-dialog/Test%20and%20publish?branch=master&style=for-the-badge)](https://github.com/AlaskaAirlines/auro-dialog/actions?query=workflow%3A%22test+and+publish%22)
-[![See it on NPM!](https://img.shields.io/npm/v/@alaskaairux/auro-dialog?style=for-the-badge&color=orange)](https://www.npmjs.com/package/@alaskaairux/auro-dialog)
-[![License](https://img.shields.io/npm/l/@alaskaairux/auro-dialog?color=blue&style=for-the-badge)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Build Status](https://img.shields.io/github/workflow/status/AlaskaAirlines/auro-interruption/Test%20and%20publish?branch=master&style=for-the-badge)](https://github.com/AlaskaAirlines/auro-interruption/actions?query=workflow%3A%22test+and+publish%22)
+[![See it on NPM!](https://img.shields.io/npm/v/@alaskaairux/auro-interruption?style=for-the-badge&color=orange)](https://www.npmjs.com/package/@alaskaairux/auro-interruption)
+[![License](https://img.shields.io/npm/l/@alaskaairux/auro-interruption?color=blue&style=for-the-badge)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ```shell
 $ npm i @alaskaairux/auro-interruption
@@ -28,7 +28,7 @@ The use of any Auro custom element has a dependency on the [Auro Design Tokens](
 
 Any update to the Auro Design Tokens will be immediately reflected with browsers that support CSS custom properties, legacy browsers will require updated components with pre-generated fallback properties.
 
-### Define dependency in project component
+### Define auro-dialog dependency in project component
 
 Defining the component dependency within each component that is using the `<auro-dialog>` component.
 
@@ -45,7 +45,7 @@ import "@alaskaairux/auro-interruption/dist/auro-dialog";
 </auro-dialog>
 ```
 
-## Install bundled assets from CDN
+## Install auro-dialog bundled assets from CDN
 
 In cases where the project is not able to process JS assets, there are pre-processed assets available for use.
 

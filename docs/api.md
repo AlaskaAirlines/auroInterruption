@@ -13,11 +13,11 @@ auro-dialog appear above the page and require the user's attention.
 
 ## Properties
 
-| Property | Attribute | Type      | Description                                      |
-|----------|-----------|-----------|--------------------------------------------------|
-| `blank`  | `blank`   | `Boolean` | Blank dialog window, edge-to-edge fill for content |
-| `modal`  | `modal`   | `Boolean` | Modal dialog restricts the user to take an action (no default close actions) |
-| `open`   | `open`    | `Boolean` | Sets state of dialog to open                     |
+| Property      | Attribute     | Type      | Description                                      |
+|---------------|---------------|-----------|--------------------------------------------------|
+| `modal`       | `modal`       | `Boolean` | Modal dialog restricts the user to take an action (no default close actions) |
+| `open`        | `open`        | `Boolean` | Sets state of dialog to open                     |
+| `unformatted` | `unformatted` | `Boolean` | Unformatted dialog window, edge-to-edge fill for content |
 
 ## Slots
 

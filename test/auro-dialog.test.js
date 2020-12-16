@@ -70,7 +70,7 @@ describe('auro-dialog', () => {
 
   it('auro-dialog renders only a close icon', async () => {
     const el = await fixture(html`
-      <auro-dialog blank></auro-dialog>
+      <auro-dialog unformatted></auro-dialog>
     `);
 
     const root = el.shadowRoot;
@@ -80,7 +80,7 @@ describe('auro-dialog', () => {
 
   it('auro-dialog renders no close icon', async () => {
     const el = await fixture(html`
-      <auro-dialog blank modal></auro-dialog>
+      <auro-dialog unformatted modal></auro-dialog>
     `);
 
     const root = el.shadowRoot;

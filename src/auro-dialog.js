@@ -18,7 +18,7 @@ import closeIcon from '@alaskaairux/orion-icons/dist/icons/close-lg_es6.js';
  *
  * @attr {Boolean} modal - Modal dialog restricts the user to take an action (no default close actions)
  * @attr {Boolean} fixed - Uses fixed pixel values for element shape
- * @attr {Boolean} blank - Blank dialog window, edge-to-edge fill for content
+ * @attr {Boolean} unformatted - Unformatted dialog window, edge-to-edge fill for content
  * @attr {Boolean} sm - Sets dialog box to small style
  * @attr {Boolean} md - Sets dialog box to medium style
  * @attr {Boolean} sm lg - Sets dialog to sm for desktop and lg for mobile
@@ -62,7 +62,7 @@ class AuroDialog extends LitElement {
   static get properties() {
     return {
       modal: { type: Boolean },
-      blank: { type: Boolean },
+      unformatted: { type: Boolean },
       open:   {
         type: Boolean,
         reflect: true
@@ -77,7 +77,7 @@ class AuroDialog extends LitElement {
 
     this.dialog = this.shadowRoot.getElementById('dialog');
 
-    if (!this.blank) {
+    if (!this.unformatted) {
       this.slt = slot.assignedNodes();
 
       if (this.slt.length === this.zero) {
@@ -166,7 +166,7 @@ class AuroDialog extends LitElement {
 
       <dialog id="dialog" @click=${this.display()} class="${classMap(contentClasses)}" aria-labelledby="dialog-header">
 
-      ${this.blank
+      ${this.unformatted
         ? html`
           <slot name="content"></slot>
           ${this.modal

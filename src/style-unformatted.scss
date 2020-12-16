@@ -1,7 +1,7 @@
 @import "./node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SCSSVariables";
 @import "./node_modules/@alaskaairux/orion-web-core-style-sheets/dist/breakpoints";
 
-[blank] .blankWrapper {
+[unformatted] .unformattedWrapper {
   padding: var(--auro-size-xl);
 
   @include auro_breakpoint--md {
