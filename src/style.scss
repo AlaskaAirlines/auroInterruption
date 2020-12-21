@@ -50,6 +50,115 @@ $auro-spacing-options: none;
   }
 }
 
+// Default selector setting mobile-first specs
+.dialog {
+
+  // baseline dialog UI / mobile-first
+  @include auro_transition(all, 0.3s, ease-in-out);
+
+  position: fixed;
+  display: block;
+  width: 100%;
+  padding: var(--auro-size-xl);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  border: 0;
+  transform: translateY(100%);
+  max-height: 90%;
+  background: var(--auro-color-background-lightest);
+  z-index: -1;
+  overflow: auto;
+
+  &--hidden {
+    display: none;
+  }
+
+  // open modifier
+  &--open {
+    opacity: 1;
+    transform: translateY(0%);
+    z-index: var(--auro-depth-modal);
+  }
+
+  // footer slot
+  &-footer {
+    padding-top: var(--auro-size-xl);
+
+    @include auro_breakpoint--md {
+      ::slotted(*) {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  // 1024px breakpoint / large dialog size is default
+  @include auro_breakpoint--md {
+    margin: auto;
+    padding: var(--auro-size-xxxl);
+    bottom: unset;
+    top: 10%;
+    max-width: 80%;
+    max-height: 80%;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.12), 0 1px 10px 0 rgba(0,0,0,0.1);
+    transform: scale(0);
+
+    &--open {
+      transform: scale(1);
+    }
+  }
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  & svg {
+    fill: var(--auro-color-text-secondary-on-light);
+  }
+
+  &--action {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: var(--auro-border-radius);
+    border: 2px solid transparent;
+
+    &:focus {
+      border-color: var(--auro-color-border-active-on-light);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+// sets dynamic placement of close-X based on padding specs
+:host([unformatted]) {
+  .dialog-header--action {
+    position: absolute;
+    top: var(--auro-size-xl);
+    right: var(--auro-size-xl);
+
+    @include auro_breakpoint--md {
+      top: var(--auro-size-xxxl);
+      right: var(--auro-size-xxxl);
+    }
+  }
+}
+
+// sets X from black to white
+:host([unformatted][onDark]) {
+  .dialog-header--action {
+    color: var(--auro-color-base-white);
+  }
+}
+
 :host([sm]) {
   .dialog {
     max-height: 30%;
@@ -119,117 +228,8 @@ $auro-spacing-options: none;
   }
 }
 
-// Default selector setting mobile-first specs
-.dialog {
-
-  // baseline dialog UI / mobile-first
-  @include auro_transition(all, 0.3s, ease-in-out);
-
-  position: fixed;
-  display: block;
-  width: 100%;
-  padding: var(--auro-size-xl);
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  border: 0;
-  transform: translateY(100%);
-  max-height: 90%;
-  background: var(--auro-color-background-lightest);
-  z-index: -1;
-  overflow: auto;
-
-  &--hidden {
-    display: none;
-  }
-
-  // open modifier
-  &--open {
-    opacity: 1;
-    transform: translateY(0%);
-    z-index: var(--auro-depth-modal);
-  }
-
-  // footer slot
-  &-footer {
-    padding-top: var(--auro-size-xl);
-
-    @include auro_breakpoint--md {
-      ::slotted(*) {
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
-  }
-
-  // 1024px breakpoint / large dialog size is default
-  @include auro_breakpoint--md {
-    margin: auto;
-    padding: var(--auro-size-xxxl);
-    bottom: unset;
-    top: 10%;
-    max-width: 80%;
-    max-height: 80%;
-    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.12), 0 1px 10px 0 rgba(0,0,0,0.1);
-    transform: scale(0);
-
-    &--open {
-      transform: scale(1);
-    }
-  }
-}
-
 :host([unformatted]) {
   .dialog {
     padding: 0;
-  }
-}
-
-.dialog-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  & svg {
-    fill: var(--auro-color-text-secondary-on-light);
-  }
-
-  &--action {
-    margin: 0;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    border-radius: var(--auro-border-radius);
-    border: 2px solid transparent;
-
-    &:focus {
-      border-color: var(--auro-color-border-active-on-light);
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-}
-
-// sets dynamic placement of X based on padding specs
-:host([unformatted]) {
-  .dialog-header--action {
-    position: absolute;
-    top: var(--auro-size-xl);
-    right: var(--auro-size-xl);
-
-    @include auro_breakpoint--md {
-      top: var(--auro-size-xxxl);
-      right: var(--auro-size-xxxl);
-    }
-  }
-}
-
-// sets X from black to white
-:host([unformatted][onDark]) {
-  .dialog-header--action {
-    color: var(--auro-color-base-white);
   }
 }

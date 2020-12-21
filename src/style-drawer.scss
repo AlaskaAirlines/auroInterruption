@@ -1,0 +1,66 @@
+// Copyright (c) 2020 Alaska Airlines. All right reserved. Licensed under the Apache-2.0 license
+// See LICENSE in the project root for license information.
+
+// ---------------------------------------------------------------------
+@import "./node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SCSSVariables";
+@import "./node_modules/@alaskaairux/orion-web-core-style-sheets/dist/breakpoints";
+
+// layout styles - define any layout specifications for UI that is contained WITHIN the component
+// never define layout that would cause effect on element outside the scope of this component
+
+
+// Default selector setting mobile-first specs
+.dialog {
+  transform: translateX(100%);
+  max-height: unset;
+  height: 100%;
+  top: 0;
+  left: unset;
+  max-width: 90%;
+
+  // open modifier
+  &--open {
+    transform: translateX(0%);
+  }
+}
+
+:host([left]) {
+  .dialog {
+    transform: translateX(-100%);
+    left: 0;
+    right: unset;
+
+    // open modifier
+    &--open {
+      transform: translateX(0%);
+    }
+  }
+}
+
+:host([sm]),
+:host([md]),
+:host([lg]) {
+  .dialog {
+    max-height: 100%;
+  }
+
+  @include auro_breakpoint--md {
+    .dialog {
+      top: 0%;
+      max-height: unset;
+    }
+  }
+}
+
+:host([sm][lg]),
+:host([md][lg]) {
+  .dialog {
+    max-height: 100%;
+  }
+
+  @include auro_breakpoint--md {
+    .dialog {
+      max-height: 100%;
+    }
+  }
+}

@@ -26,10 +26,13 @@ const getSharedPlugins = (isLegacy) => [
 ];
 
 const modernConfig = {
-  input: 'src/auro-dialog.js',
+  input: {
+    ['auro-dialog__bundled']: './src/auro-dialog.js',
+    ['auro-drawer__bundled']: './src/auro-drawer.js'
+  },
   output: {
     format: 'esm',
-    file: 'dist/auro-dialog__bundled.js'
+    dir: 'dist/'
   },
   plugins: [
     // remove shady DOM polyfill for modern browsers
@@ -60,4 +63,13 @@ const legacyConfig = {
   plugins: getSharedPlugins(true)
 };
 
-export default [modernConfig, legacyConfig];
+const legacyConfigDrawer = {
+  input: 'src/es5-drawer.js',
+  output: {
+    format: 'iife',
+    file: 'dist/auro-drawer__bundled.es5.js'
+  },
+  plugins: getSharedPlugins(true)
+};
+
+export default [modernConfig, legacyConfig, legacyConfigDrawer];

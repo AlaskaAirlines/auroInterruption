@@ -13,6 +13,7 @@
       import '@polymer/iron-demo-helpers/demo-snippet';
     </script>
     <script type="module" src="../src/auro-dialog.js"></script>
+    <script type="module" src="../src/auro-drawer.js"></script>
     <script type="module" src="contentExamples/longtext.js"></script>
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles"></style>
@@ -22,6 +23,50 @@
   </head>
   <body>
     <div class="vertical-section-container">
+      <h1>auro-drawer</h1>
+
+      <h2>auro-drawer example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#drawerExample');">Default drawer Example</button>
+          <button onclick="fireDemo('#smDrawerExample');">SM drawer Example</button>
+          <button onclick="fireDemo('#mdDrawerExample');">MD LEFT drawer Example</button>
+
+          <auro-drawer id="drawerExample">
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#drawerExample');">Close</button>
+            </span>
+          </auro-drawer>
+
+          <auro-drawer id="smDrawerExample" sm>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#smDrawerExample');">Close</button>
+            </span>
+          </auro-drawer>
+
+          <auro-drawer id="mdDrawerExample" md left>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#mdDrawerExample');">Close</button>
+            </span>
+          </auro-drawer>
+        </template>
+      </demo-snippet>
+
       <h1>auro-dialog</h1>
 
       <h2>auro-dialog unformatted example</h2>
@@ -30,7 +75,7 @@
           <button onclick="fireDemo('#unformatted');">standard medium Dialog</button>
 
           <link rel="stylesheet" type="text/css" href="../src/style-unformatted.css" />
-          <auro-dialog id="unformatted" unformatted md lg ondark>
+          <auro-dialog id="unformatted" unformatted sm lg ondark>
             <span slot="content">
               <img style="display: block; width: 100%" src="https://cdn.pocket-lint.com/r/s/1200x/assets/images/147767-tv-feature-what-order-should-you-watch-all-the-star-wars-films-image1-1wdfjceytb.jpg">
               <div class="unformattedWrapper">

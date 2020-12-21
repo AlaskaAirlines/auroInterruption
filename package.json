@@ -97,7 +97,7 @@
   ],
   "scripts": {
     "build": "npm run ciBuild",
-    "apiBuild": "wca analyze 'src/auro-dialog.js' --outFiles docs/api.md",
+    "apiBuild": "wca analyze 'src/auro-*.js' --outFiles docs/api.md",
     "bundler": "rollup -c",
     "bundle:test": "rollup -c -w",
     "postinstall": "node packageScripts/postinstall.js",

@@ -1,6 +1,6 @@
 # auro-interruption
 
-`<auro-dialog>` is part of a family of [HTML custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for displaying content to a user in both a dialog and modal-dialog format.
+`<auro-dialog>` and `<auro-drawer>` are parts of a family of [HTML custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for displaying content to a user in both a dialog and modal-dialog format.
 
 ## UI development browser support
 
@@ -34,18 +34,24 @@ Defining the component dependency within each component that is using the `<auro
 
 ```javascript
 import "@alaskaairux/auro-interruption/dist/auro-dialog";
+import "@alaskaairux/auro-interruption/dist/auro-drawer";
 ```
 
 **Reference component in HTML**
 
 ```html
-<auro-dialog id="demo2">
+<auro-dialog id="demo1">
   <span slot="header">Modal</span>
   <span slot="content">Hello World!</span>
 </auro-dialog>
+
+<auro-drawer id="demo2">
+  <span slot="header">Modal</span>
+  <span slot="content">Hello World!</span>
+</auro-drawer>
 ```
 
-## Install auro-dialog bundled assets from CDN
+## Install auro-interruption bundled assets from CDN
 
 In cases where the project is not able to process JS assets, there are pre-processed assets available for use.
 
@@ -55,6 +61,7 @@ In cases where the project is not able to process JS assets, there are pre-proce
 
 <script src="https://unpkg.com/@alaskaairux/auro-dialog@latest/dist/polyfills.js"></script>
 <script src="https://unpkg.com/@alaskaairux/auro-dialog@latest/dist/auro-dialog__bundled.js"></script>
+<script src="https://unpkg.com/@alaskaairux/auro-dialog@latest/dist/auro-drawer__bundled.js"></script>
 ```
 
 ### polyfills.js
@@ -68,7 +75,7 @@ The `polyfills.js` is packaged with this component, but **IT IS NOT NEEDED** to 
 
 ## auro-dialog use cases
 
-The `<auro-dialog>` element should be used in situations where users may:
+The `<auro-dialog>` or `<auro-drawer>` elements should be used in situations where users may:
 
 * Be prompted to take an action before doing anything else or going back
 * Be prompted to view content with the option of closing it
@@ -93,7 +100,7 @@ $ npm run dev
 $ npm run serve
 ```
 
-Open [localhost:3001](http://localhost:3001/)
+Open [localhost:3001](http://localhost:8000/)
 
 ### Testing
 Automated tests are required for every Auro component. See `.\test\auro-dialog.test.js` for the tests for this component. Run `npm test` to run the tests and check code coverage. Tests must pass and meet a certain coverage threshold to commit. See [the testing documentation](https://auro.alaskaair.com/support/tests) for more details.
