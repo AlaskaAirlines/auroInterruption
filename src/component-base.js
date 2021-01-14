@@ -47,16 +47,7 @@ export default class ComponentBase extends LitElement {
      */
     this.svg = this.dom.body.firstChild;
 
-    /**
-     * @private internal variable
-     */
-    this.zero = 0;
-
-    /**
-     * @private internal variable set state of aria-hidden
-     * @returns {string} - Value is opposite of this.open state
-     */
-    this.ariaHiddenState = 'true';
+    this._open = false;
   }
 
   // function to define props used within the scope of this component
@@ -64,7 +55,7 @@ export default class ComponentBase extends LitElement {
     return {
       modal: { type: Boolean },
       unformatted: { type: Boolean },
-      open:   {
+      open: {
         type: Boolean,
         reflect: true
       }
@@ -78,66 +69,62 @@ export default class ComponentBase extends LitElement {
 
     this.dialog = this.shadowRoot.getElementById('dialog');
 
-    if (!this.unformatted) {
-      this.slt = slot.assignedNodes();
-
-      if (this.slt.length === this.zero) {
-        return slotWrapper.classList.remove("dialog-footer");
-      }
-    }
-
-    return null
-  }
-
-  /**
-   * @private function for allowing the overlay to be clickable when the modal is open
-   * @param {object} evt - Accepts event
-   * @returns {void}
-   */
-  toggleOverlayViewable(evt) {
-    if (this.open) {
-      this.toggleViewable(evt)
+    if (!this.unformatted && slot.assignedNodes().length === 0) {
+      return slotWrapper.classList.remove("dialog-footer");
     }
   }
 
-  /**
-   * @private function for the purpose of determining open/close state of modal and locking page scroll when dialog is open
-   * @param {object} evt - Accepts event
-   * @returns {boolean} - Returns open state
-   */
-  toggleViewable(evt) {
-    const toggleEvent = document.createEvent("HTMLEvents"),
-      html = document.querySelector('html');
+  get open() {
+    return this._open;
+  }
 
-    html.style.overflow = '';
+  set open(val) {
+    console.log(val)
+    const oldVal = this._open;
+
+    this._open = val;
+    this.requestUpdate('open', oldVal).then(() => {
+      this.open ? this.openDialog() : this.closeDialog()
+    });
+  }
+
+  openDialog() {
+    setTimeout(() => {
+      this.dialog.classList.remove('dialog--hidden');
+    }, 0);
+
+    setTimeout(() => {
+      this.dialog.classList.add('dialog--open');
+    }, 100);
+  }
+
+  closeDialog() {
+    // TODO: why is this here? should we set this in openDialog()?
+    document.documentElement.style.overflow = '';
+    // TODO: why is this using old event syntax?
+    const toggleEvent = document.createEvent("HTMLEvents");
     toggleEvent.initEvent("toggle", true, false);
-    evt.stopPropagation();
-    this.open = !this.open;
     this.dispatchEvent(toggleEvent);
+
+    setTimeout(() => {
+      this.dialog.classList.remove('dialog--open');
+    }, 1);
+
+    setTimeout(() => {
+      this.dialog.classList.add('dialog--hidden');
+    }, 500);
   }
 
-  /**
-   * @private function for the purpose of setting visual state of the dialog
-   * @returns {string} - Returns CSS selector
-   */
-  display() {
-    if (this.open) {
-      setTimeout(() => {
-        this.dialog.classList.remove('dialog--hidden');
-      }, 0);
-
-      setTimeout(() => {
-        this.dialog.classList.add('dialog--open');
-      }, 100);
-    } else {
-      setTimeout(() => {
-        this.dialog.classList.remove('dialog--open');
-      }, 1);
-
-      setTimeout(() => {
-        this.dialog.classList.add('dialog--hidden');
-      }, 500);
+  handleOverlayClick(e) {
+    if (this.open && !this.modal) {
+      this.handleCloseButtonClick(e);
     }
+  }
+
+  handleCloseButtonClick(e) {
+    // TODO: do we need to?
+    e.stopPropagation();
+    this.open = false;
   }
 
   static get styles() {
@@ -146,6 +133,17 @@ export default class ComponentBase extends LitElement {
       styleCssFixed,
       styleUnformattedCssFixed
     ];
+  }
+
+  getCloseButton() {
+    return this.modal ? 
+      html`` : 
+      html`
+        <button class="dialog-header--action" id="dialog-close" @click="${this.handleCloseButtonClick}">
+          <div>${this.svg}</div>
+          <div class="util_displayHiddenVisually">Close</div>
+        </button>
+      `
   }
 
   // function that renders the HTML and CSS into  the scope of the component
@@ -161,48 +159,32 @@ export default class ComponentBase extends LitElement {
       'dialog--hidden': true
     }
 
-
+    // TODO: what if no dialog-header?
     return html`
-      <div class="${classMap(classes)}" id="dialog-overlay" @click=${this.modal ? null : this.toggleOverlayViewable}>
-      </div>
+      <div class="${classMap(classes)}" id="dialog-overlay" @click=${this.handleOverlayClick}></div>
 
-      <dialog id="dialog" @click=${this.display()} class="${classMap(contentClasses)}" aria-labelledby="dialog-header">
-
-      ${this.unformatted
-        ? html`
-          <slot name="content"></slot>
-          ${this.modal
-            ? html``
-            : html`
-              <button class="dialog-header--action" id="dialog-close" @click="${this.toggleViewable}">
-                <div>${this.svg}</div>
-                <div class="util_displayHiddenVisually">Click to close</div>
-              </button>
-            `
-          }
-        `
-        : html`<div class="dialog-header">
-        <h1 class="heading heading--700 util_stackMarginNone--top" id="dialog-header">
-          <slot name="header">Default header ...</slot>
-        </h1>
-        ${this.modal
-          ? html``
+      <div role="dialog" id="dialog" class="${classMap(contentClasses)}" aria-labelledby="dialog-header" tabindex="-1">
+        ${this.unformatted
+          ? html`
+            <slot name="content"></slot>
+            ${this.getCloseButton()}
+          `
           : html`
-            <button class="dialog-header--action" id="dialog-close" @click="${this.toggleViewable}">
-              <div>${this.svg}</div>
-              <div class="util_displayHiddenVisually">Click to close</div>
-            </button>
+            <div class="dialog-header">
+              <h1 class="heading heading--700 util_stackMarginNone--top" id="dialog-header">
+                <slot name="header">Default header ...</slot>
+              </h1>
+              ${this.getCloseButton()}
+            </div>
+            <div class="dialog-content">
+              <slot name="content"></slot>
+            </div>
+            <div class="dialog-footer" id="footerWrapper">
+              <slot name="footer" id="footer"></slot>
+            </div>
           `
         }
-        </div>
-        <div class="dialog-content">
-          <slot name="content"></slot>
-        </div>
-        <div class="dialog-footer" id="footerWrapper">
-          <slot name="footer" id="footer"></slot>
-        </div>`
-      }
-      </dialog>
+      </div>
     `;
   }
 }

@@ -20,6 +20,11 @@ class AuroDialog extends ComponentBase {
   static get properties() {
     return {
       ...super.properties,
+      // use custom accessors on base class
+      open: {
+        ...super.properties.open,
+        noAccessor: true
+      }
     };
   }
 
