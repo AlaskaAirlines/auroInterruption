@@ -99,13 +99,14 @@ export default class ComponentBase extends LitElement {
   }
 
   openDialog() {
-    setTimeout(() => {
-      this.dialog.classList.remove('dialog--hidden');
-    }, 0);
+    this.triggerElement = document.activeElement;
+    this.dialog.classList.remove('dialog--hidden');
 
     setTimeout(() => {
       this.dialog.classList.add('dialog--open');
-    }, 100);
+      this.focus();
+    }, 50);
+
   }
 
   closeDialog() {
@@ -116,13 +117,12 @@ export default class ComponentBase extends LitElement {
     toggleEvent.initEvent("toggle", true, false);
     this.dispatchEvent(toggleEvent);
 
-    setTimeout(() => {
-      this.dialog.classList.remove('dialog--open');
-    }, 1);
-
+    this.dialog.classList.remove('dialog--open');
     setTimeout(() => {
       this.dialog.classList.add('dialog--hidden');
     }, 500);
+
+    this.triggerElement.focus();
   }
 
   handleOverlayClick(e) {
@@ -140,6 +140,12 @@ export default class ComponentBase extends LitElement {
   handleKeydown({ key, keyCode }) {
     if (this.open && !this.modal && (key === 'Escape' || keyCode === 27)) {
       this.open = false;
+    }
+  }
+
+  focus() {
+    if (this.open) {
+      this.dialog.focus();
     }
   }
 

@@ -144,4 +144,34 @@ describe('auro-drawer', () => {
     expect(el.open).to.be.true;
   })
 
+  it('handles focus on open and close', async () => {
+    const open = function() {
+      el.open = true;
+    }
+    const el = await fixture(html`
+      <auro-dialog>
+        <span slot="header">It's a dialog</span>
+        <span slot="content">Hello World!</span>
+      </auro-dialog>
+      <button @click=${open}>Open</button>
+    `);
+
+    const button = document.querySelector('button');
+    button.focus();
+    button.click();
+
+    await el.updated;
+    await sleep(100);
+    expect(el.shadowRoot.activeElement).to.equal(el.dialog);
+
+    el.open = false;
+    await el.updated;
+    await sleep(100);
+    expect(document.activeElement).to.equal(button);
+  });
+
 });
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
