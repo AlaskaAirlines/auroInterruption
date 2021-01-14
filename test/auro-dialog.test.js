@@ -144,17 +144,8 @@ describe('auro-drawer', () => {
     expect(el.open).to.be.true;
   })
 
-  it('handles focus on open and close', async () => {
-    const open = function() {
-      el.open = true;
-    }
-    const el = await fixture(html`
-      <auro-dialog>
-        <span slot="header">It's a dialog</span>
-        <span slot="content">Hello World!</span>
-      </auro-dialog>
-      <button @click=${open}>Open</button>
-    `);
+  it('handles focus on open and close', async () => {    
+    const el = await getFixtureWithOpenButton();
 
     const button = document.querySelector('button');
     button.focus();
@@ -170,8 +161,40 @@ describe('auro-drawer', () => {
     expect(document.activeElement).to.equal(button);
   });
 
+  it('makes outside elements inert and aria-hidden', async () => {    
+    const el = await getFixtureWithOpenButton();
+  
+    const button = document.querySelector('button');
+    button.focus();
+    button.click();
+  
+    await el.updated;
+    await sleep(100);
+    expect(button.hasAttribute('inert')).to.be.true;
+    expect(button.getAttribute('aria-hidden')).to.equal('true');
+  
+    el.open = false;
+    await el.updated;
+    await sleep(100);
+    expect(button.hasAttribute('inert')).to.be.false;
+    expect(button.hasAttribute('aria-hidden')).to.be.false;
+  });
 });
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function getFixtureWithOpenButton() {
+  const open = function() {
+    el.open = true;
+  }
+  const el = await fixture(html`
+    <auro-dialog>
+      <span slot="header">It's a dialog</span>
+      <span slot="content">Hello World!</span>
+    </auro-dialog>
+    <button @click=${open}>Open</button>
+  `);
+  return el;
 }

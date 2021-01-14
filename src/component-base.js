@@ -8,10 +8,12 @@ import { classMap } from 'lit-html/directives/class-map';
 
 // Import touch detection lib
 import "focus-visible/dist/focus-visible.min.js";
+import 'inert-polyfill/inert-polyfill.min.js';
 import styleCss from "./style-css.js";
 import styleCssFixed from './style-fixed-css.js';
 import styleUnformattedCssFixed from './style-unformatted-fixed-css.js';
 import closeIcon from '@alaskaairux/orion-icons/dist/icons/close-lg_es6.js';
+import { makeSiblingsInert } from './util.js';
 
 // See https://git.io/JJ6SJ for "How to document your components using JSDoc"
 /**
@@ -107,6 +109,7 @@ export default class ComponentBase extends LitElement {
       this.focus();
     }, 50);
 
+    this.cleanupInertNodes = makeSiblingsInert(this);
   }
 
   closeDialog() {
@@ -122,6 +125,7 @@ export default class ComponentBase extends LitElement {
       this.dialog.classList.add('dialog--hidden');
     }, 500);
 
+    this.cleanupInertNodes();
     this.triggerElement.focus();
   }
 
