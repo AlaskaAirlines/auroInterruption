@@ -79,13 +79,23 @@ export default class ComponentBase extends LitElement {
   }
 
   set open(val) {
-    console.log(val)
     const oldVal = this._open;
 
     this._open = val;
     this.requestUpdate('open', oldVal).then(() => {
       this.open ? this.openDialog() : this.closeDialog()
     });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.keydownEventHandler = this.handleKeydown.bind(this);
+    window.addEventListener('keydown', this.keydownEventHandler);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('keydown', this.keydownEventHandler);
   }
 
   openDialog() {
@@ -125,6 +135,12 @@ export default class ComponentBase extends LitElement {
     // TODO: do we need to?
     e.stopPropagation();
     this.open = false;
+  }
+
+  handleKeydown({ key, keyCode }) {
+    if (this.open && !this.modal && (key === 'Escape' || keyCode === 27)) {
+      this.open = false;
+    }
   }
 
   static get styles() {

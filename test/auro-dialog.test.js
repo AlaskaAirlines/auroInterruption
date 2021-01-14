@@ -118,4 +118,30 @@ describe('auro-drawer', () => {
     await expect(title).to.equal(null);
   });
 
+  it('closes when ESC pressed', async () => {
+    const el = await fixture(html`
+      <auro-dialog open>
+        <span slot="header">It's a dialog</span>
+        <span slot="content">Hello World!</span>
+      </auro-dialog>
+    `);
+  
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await el.updated;
+    expect(el.open).to.be.false;
+  })
+  
+  it('does not close when ESC pressed if modal', async () => {
+    const el = await fixture(html`
+      <auro-dialog open modal>
+        <span slot="header">It's a dialog</span>
+        <span slot="content">Hello World!</span>
+      </auro-dialog>
+    `);
+  
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await el.updated;
+    expect(el.open).to.be.true;
+  })
+
 });
