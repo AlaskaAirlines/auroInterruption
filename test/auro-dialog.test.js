@@ -179,6 +179,18 @@ describe('auro-drawer', () => {
     expect(button.hasAttribute('inert')).to.be.false;
     expect(button.hasAttribute('aria-hidden')).to.be.false;
   });
+
+  it('dispatches toggle event on close', async () => {
+    const el = await fixture(html`
+      <auro-dialog open>
+        <span slot="header">It's a dialog</span>
+        <span slot="content">Hello World!</span>
+      </auro-dialog>
+    `);
+
+    el.open = false;
+    await oneEvent(el, 'toggle');
+  });
 });
 
 function sleep(ms) {

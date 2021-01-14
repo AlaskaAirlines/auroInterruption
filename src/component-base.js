@@ -109,15 +109,16 @@ export default class ComponentBase extends LitElement {
   }
 
   closeDialog() {
-    // TODO: why is this here? should we set this in openDialog()?
-    document.documentElement.style.overflow = '';
-    // TODO: why is this using old event syntax?
+    this.dispatchToggleEvent();
+    this.cleanupInertNodes();
+    this.triggerElement.focus();
+  }
+
+  dispatchToggleEvent() {
+    // replace with Event constructor once IE support dropped
     const toggleEvent = document.createEvent("HTMLEvents");
     toggleEvent.initEvent("toggle", true, false);
     this.dispatchEvent(toggleEvent);
-
-    this.cleanupInertNodes();
-    this.triggerElement.focus();
   }
 
   handleOverlayClick(e) {
@@ -127,8 +128,6 @@ export default class ComponentBase extends LitElement {
   }
 
   handleCloseButtonClick(e) {
-    // TODO: do we need to?
-    e.stopPropagation();
     this.open = false;
   }
 
