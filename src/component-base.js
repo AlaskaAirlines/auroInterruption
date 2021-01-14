@@ -102,14 +102,10 @@ export default class ComponentBase extends LitElement {
 
   openDialog() {
     this.triggerElement = document.activeElement;
-    this.dialog.classList.remove('dialog--hidden');
-
     setTimeout(() => {
-      this.dialog.classList.add('dialog--open');
       this.focus();
+      this.cleanupInertNodes = makeSiblingsInert(this);
     }, 50);
-
-    this.cleanupInertNodes = makeSiblingsInert(this);
   }
 
   closeDialog() {
@@ -119,11 +115,6 @@ export default class ComponentBase extends LitElement {
     const toggleEvent = document.createEvent("HTMLEvents");
     toggleEvent.initEvent("toggle", true, false);
     this.dispatchEvent(toggleEvent);
-
-    this.dialog.classList.remove('dialog--open');
-    setTimeout(() => {
-      this.dialog.classList.add('dialog--hidden');
-    }, 500);
 
     this.cleanupInertNodes();
     this.triggerElement.focus();
@@ -182,7 +173,7 @@ export default class ComponentBase extends LitElement {
 
      contentClasses = {
       'dialog': true,
-      'dialog--hidden': true
+      'dialog--open': this.open
     }
 
     // TODO: what if no dialog-header?
