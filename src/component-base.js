@@ -100,6 +100,9 @@ export default class ComponentBase extends LitElement {
     window.removeEventListener('keydown', this.keydownEventHandler);
   }
 
+  /**
+   * @private internal function
+   */
   openDialog() {
     this.triggerElement = document.activeElement;
     setTimeout(() => {
@@ -108,12 +111,18 @@ export default class ComponentBase extends LitElement {
     }, 50);
   }
 
+  /**
+   * @private internal function
+   */
   closeDialog() {
     this.dispatchToggleEvent();
     this.cleanupInertNodes();
     this.triggerElement.focus();
   }
 
+  /**
+   * @private internal function
+   */
   dispatchToggleEvent() {
     // replace with Event constructor once IE support dropped
     const toggleEvent = document.createEvent("HTMLEvents");
@@ -121,22 +130,34 @@ export default class ComponentBase extends LitElement {
     this.dispatchEvent(toggleEvent);
   }
 
+  /**
+   * @private internal function
+   */
   handleOverlayClick(e) {
     if (this.open && !this.modal) {
       this.handleCloseButtonClick(e);
     }
   }
 
+  /**
+   * @private internal function
+   */
   handleCloseButtonClick(e) {
     this.open = false;
   }
 
+  /**
+   * @private internal function
+   */
   handleKeydown({ key, keyCode }) {
     if (this.open && !this.modal && (key === 'Escape' || keyCode === 27)) {
       this.open = false;
     }
   }
 
+  /**
+   * @private internal function
+   */
   focus() {
     if (this.open) {
       this.dialog.focus();
@@ -151,9 +172,12 @@ export default class ComponentBase extends LitElement {
     ];
   }
 
+  /**
+   * @private internal function
+   */
   getCloseButton() {
-    return this.modal ? 
-      html`` : 
+    return this.modal ?
+      html`` :
       html`
         <button class="dialog-header--action" id="dialog-close" @click="${this.handleCloseButtonClick}">
           <div>${this.svg}</div>

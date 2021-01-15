@@ -55,6 +55,8 @@ import "@alaskaairux/auro-interruption/dist/auro-drawer";
 
 In cases where the project is not able to process JS assets, there are pre-processed assets available for use.
 
+Since the legacy bundle includes many polyfills that are not needed by modern browsers, we recommend you load these bundles using [differential serving](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/) so that the browser only loads the bundle it needs. To accomplish this, the script tag for the modern bundle should have `type="module"` and the script tag for the legacy bundle should have the `nomodule` attribute. See the example below.
+
 **NOTE:** Be sure to replace `@latest` in the URL with the version of the asset you want. @latest is NOT aware of any MAJOR releases, use at your own risk.
 
 ```html
@@ -64,15 +66,6 @@ In cases where the project is not able to process JS assets, there are pre-proce
 <script src="https://unpkg.com/@alaskaairux/auro-interruption@latest/dist/auro-interruption__bundled.es5.js" nomodule></script>
 <script src="https://unpkg.com/@alaskaairux/auro-interruption@latest/dist/auro-interruption__bundled.js" type="module"></script>
 ```
-
-### polyfills.js
-
-The `polyfills.js` is packaged with this component, but **IT IS NOT NEEDED** to load a polyfill per component. The `polyfills.js` will work for all additional components added to the project.
-
-### IE11 Support
-
-**Displaimer:** While these components are supported in IE, there may be issues with loading the [web components polyfill](https://www.webcomponents.org/polyfills). Please consult their documentation when supporting IE11.
-
 
 ## auro-dialog use cases
 
