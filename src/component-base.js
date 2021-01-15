@@ -133,16 +133,16 @@ export default class ComponentBase extends LitElement {
   /**
    * @private internal function
    */
-  handleOverlayClick(e) {
+  handleOverlayClick() {
     if (this.open && !this.modal) {
-      this.handleCloseButtonClick(e);
+      this.handleCloseButtonClick();
     }
   }
 
   /**
    * @private internal function
    */
-  handleCloseButtonClick(e) {
+  handleCloseButtonClick() {
     this.open = false;
   }
 
@@ -157,6 +157,7 @@ export default class ComponentBase extends LitElement {
 
   /**
    * @private internal function
+   * Focus the dialog.
    */
   focus() {
     if (this.open) {
@@ -199,7 +200,6 @@ export default class ComponentBase extends LitElement {
       'dialog--open': this.open
     }
 
-    // TODO: what if no dialog-header?
     return html`
       <div class="${classMap(classes)}" id="dialog-overlay" @click=${this.handleOverlayClick}></div>
 
