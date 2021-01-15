@@ -126,13 +126,19 @@ $auro-spacing-options: none;
     border-radius: var(--auro-border-radius);
     border: 2px solid transparent;
 
-    &:focus {
-      border-color: var(--auro-color-border-active-on-light);
-    }
-
     &:hover {
       cursor: pointer;
     }
+  }
+}
+
+:host(.focus-visible) {
+  .dialog:focus {
+    outline: 3px solid var(--auro-color-border-active-on-light);
+    outline-offset: -3px;
+  }
+  .dialog-header--action:focus {
+    border-color: var(--auro-color-border-active-on-light);
   }
 }
 
