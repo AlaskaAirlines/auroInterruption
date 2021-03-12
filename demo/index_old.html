@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"
+    />
+    <title>Auro Web Component Generator | auro-dialog custom element</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
+    <script type="module" src="../src/auro-dialog.js"></script>
+    <script type="module" src="../src/auro-drawer.js"></script>
+    <script type="module" src="contentExamples/longtext.js"></script>
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles"></style>
+    </custom-style>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <div class="vertical-section-container">
+      <h1>auro-drawer</h1>
+
+      <h2>auro-drawer example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#drawerExample');">Default drawer Example</button>
+          <button onclick="fireDemo('#smDrawerExample');">SM drawer Example</button>
+          <button onclick="fireDemo('#mdDrawerExample');">MD LEFT drawer Example</button>
+
+          <auro-drawer id="drawerExample">
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#drawerExample');">Close</button>
+            </span>
+          </auro-drawer>
+
+          <auro-drawer id="smDrawerExample" sm>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#smDrawerExample');">Close</button>
+            </span>
+          </auro-drawer>
+
+          <auro-drawer id="mdDrawerExample" md left>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#mdDrawerExample');">Close</button>
+            </span>
+          </auro-drawer>
+        </template>
+      </demo-snippet>
+
+      <h1>auro-dialog</h1>
+
+      <h2>auro-dialog unformatted example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#unformatted');">standard medium Dialog</button>
+
+          <link rel="stylesheet" type="text/css" href="../src/style-unformatted.css" />
+          <auro-dialog id="unformatted" unformatted sm lg ondark>
+            <span slot="content">
+              <img style="display: block; width: 100%" src="https://cdn.pocket-lint.com/r/s/1200x/assets/images/147767-tv-feature-what-order-should-you-watch-all-the-star-wars-films-image1-1wdfjceytb.jpg">
+              <div class="unformattedWrapper">
+                <h1 id="dialog-header">This is a header</h1>
+                These are some words that I want to put in here.
+              </div>
+            </span>
+
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
+      <h2>auro-dialog md(desktop) lg(mobile) example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#mediumLarge');">mediumLarge Dialog</button>
+          <button onclick="fireDemo('#medium');">standard medium Dialog</button>
+
+          <auro-dialog id="mediumLarge" md lg>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#mediumLarge');">Close</button>
+            </span>
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
+      <h2>auro-dialog sm(desktop) lg(mobile) example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#smallLarge');">smallLarge Dialog</button>
+          <button onclick="fireDemo('#small');">standard small Dialog</button>
+
+          <auro-dialog id="smallLarge" sm lg>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#smallLarge');">Close</button>
+            </span>
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
+      <h2>auro-dialog sm example</h2>
+      <demo-snippet>
+        <template>
+            <button onclick="fireDemo('#fixed');">Fixed</button>
+
+            <auro-dialog id="fixed" sm fixed>
+              <span slot="header">Dialog w/footer</span>
+              <span slot="content">
+                <long-text count="500"></long-text>
+              </span>
+
+              <span slot="footer">
+                <button onclick="closeDemo('#fixed');">Close</button>
+              </span>
+            </auro-dialog>
+
+          <button onclick="fireDemo('#small');">Small Dialog</button>
+
+          <auro-dialog id="small" sm>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="500"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#small');">Close</button>
+            </span>
+          </auro-dialog>
+
+          <button onclick="fireDemo('#smallLong');">Small Dialog loooooong text</button>
+
+          <auro-dialog id="smallLong" sm>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#smallLong');">Close</button>
+            </span>
+          </auro-dialog>
+
+          <button onclick="fireDemo('#smallNoFoot');">small Dialog w/o footer</button>
+
+          <auro-dialog id="smallNoFoot" sm>
+            <span slot="header">Dialog w/o footer</span>
+            <span slot="content">
+              <long-text count="500"></long-text>
+            </span>
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
+
+      <!-- -->
+
+      <h2>auro-dialog md example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#medium');">Medium Dialog</button>
+
+          <auro-dialog id="medium" md>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="500"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#medium');">Close</button>
+            </span>
+          </auro-dialog>
+
+          <button onclick="fireDemo('#mediumLong');">Medium Dialog loooooong text</button>
+
+          <auro-dialog id="mediumLong" md>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#mediumLong');">Close</button>
+            </span>
+          </auro-dialog>
+
+          <button onclick="fireDemo('#mediumNoFoot');">Medium Dialog w/o footer</button>
+
+          <auro-dialog id="mediumNoFoot" md>
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="500"></long-text>
+            </span>
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
+      <!-- -->
+
+      <h2>auro-dialog default example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#default');">Default Dialog</button>
+
+          <auro-dialog id="default">
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="500"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#default');">Close</button>
+            </span>
+          </auro-dialog>
+
+          <button onclick="fireDemo('#defaultLong');">Default Dialog loooooong text</button>
+
+          <auro-dialog id="defaultLong">
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="5000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#defaultLong');">Close</button>
+            </span>
+          </auro-dialog>
+
+          <button onclick="fireDemo('#defaultNoFoot');">Default Dialog w/o footer</button>
+
+          <auro-dialog id="defaultNoFoot">
+            <span slot="header">Dialog w/footer</span>
+            <span slot="content">
+              <long-text count="500"></long-text>
+            </span>
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
+      <!-- -->
+
+      <h2>auro-dialog full page example</h2>
+      <demo-snippet>
+        <template>
+          <button onclick="fireDemo('#dialogDynamicHeight');">Dynamic Dialog</button>
+
+          <auro-dialog id="dialogDynamicHeight" dynamic>
+            <span slot="header">Dynamic size</span>
+            <span slot="content">
+              <long-text count="8000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#dialogDynamicHeight');">Close</button>
+            </span>
+          </auro-dialog>
+
+          <button onclick="fireDemo('#dialogDynamicHeightmd');">Dynamic Dialog medium</button>
+
+          <auro-dialog id="dialogDynamicHeightmd" dynamic md>
+            <span slot="header">Dynamic size</span>
+            <span slot="content">
+              <long-text count="8000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#dialogDynamicHeightmd');">Close</button>
+            </span>
+          </auro-dialog>
+
+          <button onclick="fireDemo('#dialogDynamicHeightsm');">Dynamic Dialog small</button>
+
+          <auro-dialog id="dialogDynamicHeightsm" dynamic sm>
+            <span slot="header">Dynamic size</span>
+            <span slot="content">
+              <long-text count="8000"></long-text>
+            </span>
+
+            <span slot="footer">
+              <button onclick="closeDemo('#dialogDynamicHeightsm');">Close</button>
+            </span>
+          </auro-dialog>
+        </template>
+      </demo-snippet>
+
+
+
+
+      <script>
+        function fireDemo(elName) {
+          let dialog = document.querySelector(elName);
+          dialog.removeAttribute("open");
+          dialog.setAttribute("open", true);
+        }
+
+        function closeDemo(elName) {
+          let dialog = document.querySelector(elName);
+          dialog.removeAttribute("open");
+        }
+        </script>
+
+    </div>
+  </body>
+</html>
