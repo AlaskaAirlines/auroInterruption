@@ -18,6 +18,8 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
+    "@alaskaairux/design-tokens": "^3.2.0",
+    "@alaskaairux/webcorestylesheets": "^3.2.0",
     "chalk": "^4.1.0",
     "inert-polyfill": "^0.2.5",
     "lit-element": "^2.4.0"
@@ -43,7 +45,6 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@open-wc/testing": "^2.5.32",
     "@open-wc/testing-karma": "^4.0.9",
-    "@polymer/iron-demo-helpers": "^3.1.0",
     "@rollup/plugin-alias": "^3.1.2",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^17.1.0",
@@ -74,6 +75,7 @@
     "postcss-rem-to-pixel": "^4.1.2",
     "postcss-remove-rules": "^1.0.0",
     "postcss-selector-replace": "^1.0.2",
+    "prismjs": "^1.23.0",
     "rollup": "^2.40.0",
     "rollup-plugin-minify-html-literals": "^1.2.5",
     "rollup-plugin-serve": "^1.1.0",
