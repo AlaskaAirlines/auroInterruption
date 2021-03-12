@@ -2,6 +2,7 @@ import { fixture, html, expect, oneEvent } from '@open-wc/testing';
 import sinon from 'sinon';
 import '../src/auro-dialog.js';
 import '../src/auro-drawer.js';
+import './test-button.js';
 
 describe('auro-dialog', () => {
   it('auro-dialog is accessible', async () => {
@@ -178,6 +179,25 @@ describe('auro-drawer', () => {
     await sleep(100);
     expect(button.hasAttribute('inert')).to.be.false;
     expect(button.hasAttribute('aria-hidden')).to.be.false;
+  });
+
+  it('outside custom elements cannot be focused', async () => {
+    const el = await fixture(html`
+      <auro-dialog>
+        <span slot="header">It's a dialog</span>
+        <span slot="content">Hello World!</span>
+      </auro-dialog>
+      <test-button>Try to focus me</test-button>
+    `);
+
+    el.open = true;
+    await el.updated;
+    await sleep(100);
+
+    const button = document.querySelector('test-button');
+    button.focus();
+
+    expect(document.activeElement).to.not.equal(button);
   });
 
   it('dispatches toggle event on close', async () => {

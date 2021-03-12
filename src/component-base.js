@@ -8,7 +8,8 @@ import { classMap } from 'lit-html/directives/class-map';
 
 // Import touch detection lib
 import "focus-visible/dist/focus-visible.min.js";
-import 'inert-polyfill/inert-polyfill.min.js';
+import 'wicg-inert';
+
 import styleCss from "./style-css.js";
 import styleCssFixed from './style-fixed-css.js';
 import styleUnformattedCssFixed from './style-unformatted-fixed-css.js';
@@ -117,7 +118,8 @@ export default class ComponentBase extends LitElement {
   closeDialog() {
     this.dispatchToggleEvent();
     this.cleanupInertNodes();
-    this.triggerElement.focus();
+    // Wait for the inert polyfill to react to the DOM change
+    Promise.resolve().then(() => { this.triggerElement.focus() } );
   }
 
   /**
@@ -181,8 +183,8 @@ export default class ComponentBase extends LitElement {
       html`` :
       html`
         <button class="dialog-header--action" id="dialog-close" @click="${this.handleCloseButtonClick}">
-          <div>${this.svg}</div>
-          <div class="util_displayHiddenVisually">Close</div>
+          <span>${this.svg}</span>
+          <span class="util_displayHiddenVisually">Close</span>
         </button>
       `
   }
