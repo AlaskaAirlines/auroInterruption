@@ -315,12 +315,14 @@
 
       <script>
         function fireDemo(elName) {
+          console.warn('fireDemo');
           let dialog = document.querySelector(elName);
           dialog.removeAttribute("open");
           dialog.setAttribute("open", true);
         }
 
         function closeDemo(elName) {
+          console.warn('closeDemo');
           let dialog = document.querySelector(elName);
           dialog.removeAttribute("open");
         }

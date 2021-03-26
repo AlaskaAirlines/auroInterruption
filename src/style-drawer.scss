@@ -2,8 +2,8 @@
 // See LICENSE in the project root for license information.
 
 // ---------------------------------------------------------------------
-@import "./node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SCSSVariables";
-@import "./node_modules/@alaskaairux/orion-web-core-style-sheets/dist/breakpoints";
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables";
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints";
 
 // layout styles - define any layout specifications for UI that is contained WITHIN the component
 // never define layout that would cause effect on element outside the scope of this component
@@ -11,12 +11,14 @@
 
 // Default selector setting mobile-first specs
 .dialog {
-  transform: translateX(100%);
-  max-height: unset;
-  height: 100%;
   top: 0;
   left: unset;
+
   max-width: 90%;
+  height: 100%;
+  max-height: unset;
+
+  transform: translateX(100%);
 
   // open modifier
   &--open {
@@ -26,9 +28,10 @@
 
 :host([left]) {
   .dialog {
-    transform: translateX(-100%);
-    left: 0;
     right: unset;
+    left: 0;
+
+    transform: translateX(-100%);
 
     // open modifier
     &--open {
@@ -40,27 +43,26 @@
 :host([sm]),
 :host([md]),
 :host([lg]) {
-  .dialog {
-    max-height: 100%;
-  }
-
   @include auro_breakpoint--md {
     .dialog {
       top: 0%;
+
       max-height: unset;
     }
+  }
+  .dialog {
+    max-height: 100%;
   }
 }
 
 :host([sm][lg]),
 :host([md][lg]) {
-  .dialog {
-    max-height: 100%;
-  }
-
   @include auro_breakpoint--md {
     .dialog {
       max-height: 100%;
     }
+  }
+  .dialog {
+    max-height: 100%;
   }
 }

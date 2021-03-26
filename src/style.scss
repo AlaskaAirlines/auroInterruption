@@ -4,19 +4,19 @@
 // ---------------------------------------------------------------------
 
 // Import Auro tokens
-@import "./node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SCSSVariables";
-@import "./node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SassCustomProperties";
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables";
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties";
 
-@import "./node_modules/@alaskaairux/orion-web-core-style-sheets/dist/breakpoints";
-@import "./node_modules/@alaskaairux/orion-web-core-style-sheets/dist/core";
-@import "./node_modules/@alaskaairux/orion-web-core-style-sheets/dist/animation";
-@import "./node_modules/@alaskaairux/orion-web-core-style-sheets/dist/headings";
-@import "./node_modules/@alaskaairux/orion-web-core-style-sheets/dist/utilityClasses/displayProperties";
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints";
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/core";
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/animation";
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/headings";
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/utilityClasses/displayProperties";
 
 $auro-spacing-types: stack;
 $auro-spacing-options: none;
-@import "./node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SCSSVariableMap";
-@import "./node_modules/@alaskaairux/orion-web-core-style-sheets/dist/utilityMixins/spacingUtility";
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariableMap";
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/utilityMixins/spacingUtility";
 // container styles - defines the look of the outer custom component
 // :host {
 //   ...
@@ -29,56 +29,84 @@ $auro-spacing-options: none;
 // container shape styles
 .dialogOverlay {
   position: fixed;
+  z-index: -1;
   bottom: 0;
   left: 0;
-  height: 100%;
+
   width: 100%;
-  z-index: -1;
+  height: 100%;
 
   // Open modifier for default dialog state
   &--open {
-    background: rgba(0, 0, 0, 0.2);
-    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 0);
     z-index: var(--auro-depth-overlay);
+
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 0);
+
+    background: rgba(0, 0, 0, 0.2);
   }
 
   // Modal modifier for modal/blocking state
   &--modal {
-    background: rgba(0, 0, 0, 0.5);
-    transition: background 0.3s cubic-bezier(0.4, 0, 0.5, 0);
     z-index: var(--auro-depth-overlay);
+
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.5, 0);
+
+    background: rgba(0, 0, 0, 0.5);
   }
 }
 
 // Default selector setting mobile-first specs
 .dialog {
-
-  // baseline dialog UI / mobile-first
-  @include auro_transition(all, 0.3s, ease-in-out);
-
   position: fixed;
-  display: block;
-  width: 100%;
-  padding: var(--auro-size-xl);
+  z-index: -1;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+
+  display: block;
+  visibility: hidden;
+  overflow: auto;
+
+  width: 100%;
+  max-height: 90%;
+  padding: var(--auro-size-xl);
+
+  transform: translateY(100%);
+
   opacity: 0;
   border: 0;
-  transform: translateY(100%);
-  max-height: 90%;
   background: var(--auro-color-background-lightest);
-  z-index: -1;
-  overflow: auto;
-  opacity: 0;
-  visibility: hidden;
+  // baseline dialog UI / mobile-first
+
+  @include auro_transition(all, 0.3s, ease-in-out);
+  // 1024px breakpoint / large dialog size is default
+  @include auro_breakpoint--md {
+    top: 10%;
+    bottom: unset;
+
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
+    padding: var(--auro-size-xxxl);
+
+    transform: scale(0);
+
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.12), 0 1px 10px 0 rgba(0,0,0,0.1);
+
+    &--open {
+      transform: scale(1);
+    }
+  }
 
   // open modifier
   &--open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0%);
     z-index: var(--auro-depth-modal);
+
+    visibility: visible;
+
+    transform: translateY(0%);
+
+    opacity: 1;
   }
 
   // footer slot
@@ -92,28 +120,12 @@ $auro-spacing-options: none;
       }
     }
   }
-
-  // 1024px breakpoint / large dialog size is default
-  @include auro_breakpoint--md {
-    margin: auto;
-    padding: var(--auro-size-xxxl);
-    bottom: unset;
-    top: 10%;
-    max-width: 80%;
-    max-height: 80%;
-    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.12), 0 1px 10px 0 rgba(0,0,0,0.1);
-    transform: scale(0);
-
-    &--open {
-      transform: scale(1);
-    }
-  }
 }
 
 .dialog-header {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
+  justify-content: space-between;
 
   & svg {
     fill: var(--auro-color-text-secondary-on-light);
@@ -122,10 +134,11 @@ $auro-spacing-options: none;
   &--action {
     margin: 0;
     padding: 0;
-    background-color: transparent;
+
     border: none;
-    border-radius: var(--auro-border-radius);
     border: 2px solid transparent;
+    border-radius: var(--auro-border-radius);
+    background-color: transparent;
 
     &:hover {
       cursor: pointer;
@@ -165,71 +178,67 @@ $auro-spacing-options: none;
 }
 
 :host([sm]) {
-  .dialog {
-    max-height: 30%;
-  }
-
   @include auro_breakpoint--md {
     .dialog {
       top: 10%;
-      max-height: 80%;
+
       max-width: 40%;
+      max-height: 80%;
       padding: var(--auro-size-xxl);
     }
   }
-
   @include auro_breakpoint--lg {
     .dialog {
       max-width: 30%;
     }
   }
-
   // custom large screen breakpoint
   @include auro_breakpoint($min: 1800px) {
     .dialog {
       max-width: 30%;
     }
   }
+  .dialog {
+    max-height: 30%;
+  }
 }
 
 :host([md]) {
-  .dialog {
-    max-height: 50%;
-  }
-
   @include auro_breakpoint--md {
     .dialog {
       top: 10%;
-      max-height: 80%;
+
       max-width: 70%;
+      max-height: 80%;
     }
   }
-
   @include auro_breakpoint--lg {
     .dialog {
       top: 10%;
+
       max-width: 60%;
     }
   }
-
   // custom large screen breakpoint
   @include auro_breakpoint($min: 1800px) {
     .dialog {
       max-width: 45%;
     }
   }
+  .dialog {
+    max-height: 50%;
+  }
 }
 
 :host([sm][lg]),
 :host([md][lg]) {
-  .dialog {
-    max-height: 90%;
-  }
-
   @include auro_breakpoint--md {
     .dialog {
       max-height: 80%;
     }
+  }
+  .dialog {
+    max-height: 90%;
   }
 }
 

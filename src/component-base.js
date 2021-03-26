@@ -13,7 +13,7 @@ import 'wicg-inert';
 import styleCss from "./style-css.js";
 import styleCssFixed from './style-fixed-css.js';
 import styleUnformattedCssFixed from './style-unformatted-fixed-css.js';
-import closeIcon from '@alaskaairux/orion-icons/dist/icons/close-lg_es6.js';
+import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg_es6.js';
 import { makeSiblingsInert } from './util.js';
 
 // See https://git.io/JJ6SJ for "How to document your components using JSDoc"

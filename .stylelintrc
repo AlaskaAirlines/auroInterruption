@@ -4,7 +4,6 @@
     "no-duplicate-selectors": null,
     "font-family-no-duplicate-names": null,
     "no-descending-specificity": null,
-    "selector-type-no-unknown": null,
-    "declaration-block-no-duplicate-properties": null
+    "selector-type-no-unknown": null
   }
 }

@@ -1,6 +1,6 @@
-# auro-interruption
+# Interruption
 
-`<auro-dialog>` and `<auro-drawer>` are parts of a family of [HTML custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for displaying content to a user in both a dialog and modal-dialog format.
+`<auro-dialog>` and `<auro-drawer>` are [HTML custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for displaying content to a user in both a dialog and modal-dialog format.
 
 ## UI development browser support
 
@@ -28,9 +28,9 @@ The use of any Auro custom element has a dependency on the [Auro Design Tokens](
 
 Any update to the Auro Design Tokens will be immediately reflected with browsers that support CSS custom properties, legacy browsers will require updated components with pre-generated fallback properties.
 
-### Define auro-dialog dependency in project component
+### Define dependency in project component
 
-Defining the component dependency within each component that is using the `<auro-dialog>` component.
+Defining the component dependency within each component that is using the `<auro-dialog>` or `<auro-drawer>` component.
 
 ```javascript
 import "@alaskaairux/auro-interruption/dist/auro-dialog";
@@ -96,3 +96,7 @@ Open [localhost:8000](http://localhost:8000/)
 
 ### Testing
 Automated tests are required for every Auro component. See `.\test\auro-dialog.test.js` for the tests for this component. Run `npm test` to run the tests and check code coverage. Tests must pass and meet a certain coverage threshold to commit. See [the testing documentation](https://auro.alaskaair.com/support/tests) for more details.
+
+### Demo deployment
+
+To deploy a demo version of the component for review, run `npm run demo:build` to create a `./build` directory that can be pushed to any static server.

@@ -1,7 +1,7 @@
 ---
 name: User Story
 about: Crate a new user story for a unit of work
-title: ''
+title: 'auro-interruption'
 labels: 'Status: Proposal'
 assignees: blackfalcon
 ---
