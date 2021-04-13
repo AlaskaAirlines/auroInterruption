@@ -30,7 +30,7 @@
     <script type="module">
       import 'https://unpkg.com/marked@latest/marked.min.js';
       import 'https://unpkg.com/prismjs@latest/prism.js';
-      fetch('/demo/demo.md')
+      fetch('/demo/drawer.md')
         .then((response) => response.text())
         .then((text) => {
           const rawHtml = marked(text);
@@ -38,12 +38,13 @@
           Prism.highlightAll();
         });
     </script>
-    <script type="module" src="../src/auro-dialog.js"></script>
     <script type="module" src="../src/auro-drawer.js"></script>
 
     <!-- If additional elements are needed for the demo, add them here. -->
     <script src="https://unpkg.com/@alaskaairux/auro-accordion@latest/dist/auro-accordion__bundled.js" type="module"></script>
     <script src="https://unpkg.com/@alaskaairux/auro-button@latest/dist/auro-button__bundled.js" type="module"></script>
+    <script src="https://unpkg.com/@alaskaairux/auro-header@latest/dist/auro-header__bundled.js" type="module"></script>
+    <script src="https://unpkg.com/@alaskaairux/auro-icon@latest/dist/auro-icon__bundled.js" type="module"></script>
 
     <!--
       This needs to be replaced with a link to the

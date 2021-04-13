@@ -22,27 +22,21 @@ Notice the use of `body.style.overflow = 'hidden';`. This is an a11y feature tha
 If for any reason this feature is unwanted, simple remove this reference and the dialog will scroll as expected. NOTE: This comes highly unrecommended.
 
 ```javascript
-  toggleDialog = (elName) => {
-    let dialog = document.querySelector(elName);
-    const html = document.querySelector('html');
-    html.style.overflow = 'hidden';
-    dialog.removeAttribute("open");
-    dialog.setAttribute("open", true);
-  }
-  toggleDialogClose = (elName) => {
-    let dialog = document.querySelector(elName);
-    const html = document.querySelector('html');
-    html.style.overflow = '';
-    dialog.removeAttribute("open");
-  }
+toggleInterruption = (elName) => {
+  let interruption = document.querySelector(elName);
+  const html = document.querySelector('html');
+
+  interruption.hasAttribute('open')
+  ? interruption.removeAttribute("open")
+  : (interruption.removeAttribute("open"),
+    interruption.setAttribute("open", true))
+}
 ```
 
 Once the JavaScript is added to the scope of the experience, the next part is adding a trigger. In this example, the button component will toggle a dialog with the ID of `#demo1`.
 
 ```javascript
-  <auro-button onClick={() => this.toggleDialog('#demo1')}>
-    Open Dialog
-  </auro-button>
+<auro-button onClick="toggleInterruption('#demo1')">Open Default Dialog</auro-button>
 ```
 
 ## The structure
@@ -71,30 +65,63 @@ The size attribute effects the `width` of the desktop dialog. Its `height` is di
 
 
 <div class="demo--inline exampleWrapper auro_containedButtons">
-  <auro-button onClick="fireDemo('#defaultDialog')">Open default dialog</auro-button>
-  <auro-button onClick="fireDemo('#mediumDialog')">Open medium dialog</auro-button>
-  <auro-button onClick="fireDemo('#smallDialog')">Open small dialog</auro-button>
+  <auro-button onClick="toggleInterruption('#defaultDialog')">Open default dialog</auro-button>
+  <auro-button onClick="toggleInterruption('#mediumDialog')">Open medium dialog</auro-button>
+  <auro-button onClick="toggleInterruption('#smallDialog')">Open small dialog</auro-button>
 </div>
 
 <auro-dialog id="defaultDialog">
   <span slot="header">Default Dialog</span>
-  <span slot="content">
-    <ContentExample />
-  </span>
+  <div slot="content">
+    <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+    <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+    <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+    <ul>
+      <li>Caerphilly croque monsieur fondue</li>
+      <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+      <li>Cheddar cheese and biscuits chalk and cheese</li>
+      <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+    </ul>
+  </div>
+  <div slot="footer" className="auro_containedButtons">
+    <auro-button secondary onClick="toggleInterruption('#defaultDialog')">Close</auro-button>
+  </div>
 </auro-dialog>
 
 <auro-dialog id="mediumDialog" md>
   <span slot="header">Medium Dialog</span>
-  <span slot="content">
-    <ContentExample />
-  </span>
+  <div slot="content">
+    <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+    <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+    <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+    <ul>
+      <li>Caerphilly croque monsieur fondue</li>
+      <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+      <li>Cheddar cheese and biscuits chalk and cheese</li>
+      <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+    </ul>
+  </div>
+  <div slot="footer" className="auro_containedButtons">
+    <auro-button secondary onClick="toggleInterruption('#mediumDialog')">Close</auro-button>
+  </div>
 </auro-dialog>
 
 <auro-dialog id="smallDialog" sm>
   <span slot="header">Small Dialog</span>
-  <span slot="content">
-    <ContentExample />
-  </span>
+  <div slot="content">
+    <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+    <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+    <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+    <ul>
+      <li>Caerphilly croque monsieur fondue</li>
+      <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+      <li>Cheddar cheese and biscuits chalk and cheese</li>
+      <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+    </ul>
+  </div>
+  <div slot="footer" className="auro_containedButtons">
+    <auro-button secondary onClick="toggleInterruption('#smallDialog')">Close</auro-button>
+  </div>
 </auro-dialog>
 
 <auro-accordion lowProfile justifyRight>
@@ -102,32 +129,65 @@ The size attribute effects the `width` of the desktop dialog. Its `height` is di
 
   ```html
   <div class="demo--inline exampleWrapper auro_containedButtons">
-    <auro-button onClick="fireDemo('#defaultDialog')">Open default dialog</auro-button>
-    <auro-button onClick="fireDemo('#mediumDialog')">Open medium dialog</auro-button>
-    <auro-button onClick="fireDemo('#smallDialog')">Open small dialog</auro-button>
+    <auro-button onClick="toggleInterruption('#defaultDialog')">Open default dialog</auro-button>
+    <auro-button onClick="toggleInterruption('#mediumDialog')">Open medium dialog</auro-button>
+    <auro-button onClick="toggleInterruption('#smallDialog')">Open small dialog</auro-button>
   </div>
 
   <auro-dialog id="defaultDialog">
     <span slot="header">Default Dialog</span>
-    <span slot="content">
-      <ContentExample />
-    </span>
+    <div slot="content">
+      <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+      <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+      <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+      <ul>
+        <li>Caerphilly croque monsieur fondue</li>
+        <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+        <li>Cheddar cheese and biscuits chalk and cheese</li>
+        <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+      </ul>
+    </div>
+    <div slot="footer" className="auro_containedButtons">
+      <auro-button secondary onClick="toggleInterruption('#defaultDialog')">Close</auro-button>
+    </div>
   </auro-dialog>
 
   <auro-dialog id="mediumDialog" md>
     <span slot="header">Medium Dialog</span>
-    <span slot="content">
-      <ContentExample />
-    </span>
+    <div slot="content">
+      <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+      <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+      <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+      <ul>
+        <li>Caerphilly croque monsieur fondue</li>
+        <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+        <li>Cheddar cheese and biscuits chalk and cheese</li>
+        <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+      </ul>
+    </div>
+    <div slot="footer" className="auro_containedButtons">
+      <auro-button secondary onClick="toggleInterruption('#mediumDialog')">Close</auro-button>
+    </div>
   </auro-dialog>
 
   <auro-dialog id="smallDialog" sm>
     <span slot="header">Small Dialog</span>
-    <span slot="content">
-      <ContentExample />
-    </span>
+    <div slot="content">
+      <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+      <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+      <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+      <ul>
+        <li>Caerphilly croque monsieur fondue</li>
+        <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+        <li>Cheddar cheese and biscuits chalk and cheese</li>
+        <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+      </ul>
+    </div>
+    <div slot="footer" className="auro_containedButtons">
+      <auro-button secondary onClick="toggleInterruption('#smallDialog')">Close</auro-button>
+    </div>
   </auro-dialog>
-  ```
+```
 
 </auro-accordion>
 
@@ -138,51 +198,69 @@ The auro-dialog supports a modal dialog state that will lock a user into interac
 When using this state, the modal dialog must include a button action to dismiss the modal dialog as the closing icon will not be available and the user will not be able to click outside the `modal` dialog to dismiss.
 
 <div class="demo--inline exampleWrapper auro_containedButtons">
-  <auro-button onClick="fireDemo('#defaultModalDialog')">Open default modal</auro-button>
-  <auro-button onClick="fireDemo('#mediumModalDialog')">Open medium modal</auro-button>
-  <auro-button onClick="fireDemo('#smallModalDialog')">Open small modal</auro-button>
+  <auro-button onClick="toggleInterruption('#defaultModalDialog')">Open default modal</auro-button>
+  <auro-button onClick="toggleInterruption('#mediumModalDialog')">Open medium modal</auro-button>
+  <auro-button onClick="toggleInterruption('#smallModalDialog')">Open small modal</auro-button>
 </div>
 
 <auro-dialog id="defaultModalDialog" modal>
   <span slot="header">Default Modal Dialog</span>
-  <span slot="content">
-    <ContentExample />
-  </span>
-  <span slot="footer">
-    <div class="auro_containedButtons">
-      <auro-button onClick="closeDemo('#defaultModalDialog')">I understand
-        <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
-      </auro-button>
-    </div>
-  </span>
+  <div slot="content">
+    <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+    <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+    <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+    <ul>
+      <li>Caerphilly croque monsieur fondue</li>
+      <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+      <li>Cheddar cheese and biscuits chalk and cheese</li>
+      <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+    </ul>
+  </div>
+  <div slot="footer" class="auro_containedButtons">
+    <auro-button onClick="toggleInterruption('#defaultModalDialog')">I understand
+      <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
+    </auro-button>
+  </div>
 </auro-dialog>
 
 <auro-dialog id="mediumModalDialog" md modal>
   <span slot="header">Medium Dialog</span>
-  <span slot="content">
-    <ContentExample />
-  </span>
-  <span slot="footer">
-    <div class="auro_containedButtons">
-      <auro-button onClick="closeDemo('#mediumModalDialog')">I understand
-        <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
-      </auro-button>
-    </div>
-  </span>
+  <div slot="content">
+    <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+    <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+    <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+    <ul>
+      <li>Caerphilly croque monsieur fondue</li>
+      <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+      <li>Cheddar cheese and biscuits chalk and cheese</li>
+      <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+    </ul>
+  </div>
+  <div slot="footer" class="auro_containedButtons">
+    <auro-button onClick="toggleInterruption('#mediumModalDialog')">I understand
+      <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
+    </auro-button>
+  </div>
 </auro-dialog>
 
 <auro-dialog id="smallModalDialog" sm modal>
   <span slot="header">Small Dialog</span>
-  <span slot="content">
-    <ContentExample />
-  </span>
-  <span slot="footer">
-    <div class="auro_containedButtons">
-      <auro-button onClick="closeDemo('#smallModalDialog')">I understand
-        <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
-      </auro-button>
-    </div>
-  </span>
+  <div slot="content">
+    <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+    <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+    <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+    <ul>
+      <li>Caerphilly croque monsieur fondue</li>
+      <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+      <li>Cheddar cheese and biscuits chalk and cheese</li>
+      <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+    </ul>
+  </div>
+  <div slot="footer" class="auro_containedButtons">
+    <auro-button onClick="toggleInterruption('#smallModalDialog')">I understand
+      <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
+    </auro-button>
+  </div>
 </auro-dialog>
 
 <auro-accordion lowProfile justifyRight>
@@ -190,51 +268,69 @@ When using this state, the modal dialog must include a button action to dismiss 
 
   ```html
   <div class="demo--inline exampleWrapper auro_containedButtons">
-    <auro-button onClick="fireDemo('#defaultModalDialog')">Open default modal</auro-button>
-    <auro-button onClick="fireDemo('#mediumModalDialog')">Open medium modal</auro-button>
-    <auro-button onClick="fireDemo('#smallModalDialog')">Open small modal</auro-button>
+    <auro-button onClick="toggleInterruption('#defaultModalDialog')">Open default modal</auro-button>
+    <auro-button onClick="toggleInterruption('#mediumModalDialog')">Open medium modal</auro-button>
+    <auro-button onClick="toggleInterruption('#smallModalDialog')">Open small modal</auro-button>
   </div>
 
   <auro-dialog id="defaultModalDialog" modal>
     <span slot="header">Default Modal Dialog</span>
-    <span slot="content">
-      <ContentExample />
-    </span>
-    <span slot="footer">
-      <div class="auro_containedButtons">
-        <auro-button onClick="closeDemo('#defaultModalDialog')">I understand
-          <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
-        </auro-button>
-      </div>
+    <div slot="content">
+      <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+      <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+      <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+      <ul>
+        <li>Caerphilly croque monsieur fondue</li>
+        <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+        <li>Cheddar cheese and biscuits chalk and cheese</li>
+        <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+      </ul>
+    </div>
+    <div slot="footer" class="auro_containedButtons">
+      <auro-button onClick="toggleInterruption('#defaultModalDialog')">I understand
+        <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
+      </auro-button>
     </span>
   </auro-dialog>
 
   <auro-dialog id="mediumModalDialog" md modal>
     <span slot="header">Medium Dialog</span>
-    <span slot="content">
-      <ContentExample />
-    </span>
-    <span slot="footer">
-      <div class="auro_containedButtons">
-        <auro-button onClick="closeDemo('#mediumModalDialog')">I understand
-          <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
-        </auro-button>
-      </div>
+    <div slot="content">
+      <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+      <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+      <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+      <ul>
+        <li>Caerphilly croque monsieur fondue</li>
+        <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+        <li>Cheddar cheese and biscuits chalk and cheese</li>
+        <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+      </ul>
+    </div>
+    <div slot="footer" class="auro_containedButtons">
+      <auro-button onClick="toggleInterruption('#mediumModalDialog')">I understand
+        <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
+      </auro-button>
     </span>
   </auro-dialog>
 
   <auro-dialog id="smallModalDialog" sm modal>
     <span slot="header">Small Dialog</span>
-    <span slot="content">
-      <ContentExample />
-    </span>
-    <span slot="footer">
-      <div class="auro_containedButtons">
-        <auro-button onClick="closeDemo('#smallModalDialog')">I understand
-          <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
-        </auro-button>
-      </div>
-    </span>
+    <div slot="content">
+      <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+      <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+      <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+      <ul>
+        <li>Caerphilly croque monsieur fondue</li>
+        <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+        <li>Cheddar cheese and biscuits chalk and cheese</li>
+        <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+      </ul>
+    </div>
+    <div slot="footer"> class="auro_containedButtons">
+      <auro-button onClick="toggleInterruption('#smallModalDialog')">I understand
+        <auro-icon category="interface" name="chevron-right" emphasis onDark></auro-icon>
+      </auro-button>
+    </div>
   </auro-dialog>
   ```
 
@@ -244,43 +340,55 @@ When using this state, the modal dialog must include a button action to dismiss 
 
 For use case where the size of the dialog on desktop should not influence the size of the dialog on mobile, the combination API of `sm lg` and `md lg` can be used.
 
-The use of these combinations will set the first value to the dialog for a desktop experience. The second value will set the mobile experience to be up to 90% of the screen depending on the length of the conent.
+The use of these combinations will set the first value to the dialog for a desktop experience. The second value will set the mobile experience to be up to 90% of the screen depending on the length of the content.
 
 See the following examples.
 
 <div class="demo--inline exampleWrapper auro_containedButtons">
-  <auro-button onClick="fireDemo('#smLgDialog')">Open [sm lg] dialog</auro-button>
-  <auro-button onClick="fireDemo('#smMdDialog')">Open [md lg] dialog</auro-button>
+  <auro-button onClick="toggleInterruption('#smLgDialog')">Open [sm lg] dialog</auro-button>
+  <auro-button onClick="toggleInterruption('#smMdDialog')">Open [md lg] dialog</auro-button>
 </div>
 
 <auro-dialog id="smLgDialog" sm lg>
   <span slot="header">Small Modal Dialog</span>
-  <span slot="content">
-    <ContentExample />
-  </span>
-  <span slot="footer">
-    <div class="auro_containedButtons">
-      <auro-button onClick="closeDemo('#smLgDialog')">
-        I understand
-        <auro-icon category="interface" name="check-lg" emphasis onDark></auro-icon>
-      </auro-button>
-    </div>
-  </span>
+  <div slot="content">
+    <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+    <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+    <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+    <ul>
+      <li>Caerphilly croque monsieur fondue</li>
+      <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+      <li>Cheddar cheese and biscuits chalk and cheese</li>
+      <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+    </ul>
+  </div>
+  <div slot="footer" class="auro_containedButtons">
+    <auro-button onClick="toggleInterruption('#smLgDialog')">
+      I understand
+      <auro-icon category="interface" name="check-lg" emphasis onDark></auro-icon>
+    </auro-button>
+  </div>
 </auro-dialog>
 
 <auro-dialog id="smMdDialog" md lg>
   <span slot="header">Medium Modal Dialog</span>
-  <span slot="content">
-    <ContentExample />
-  </span>
-  <span slot="footer">
-    <div class="auro_containedButtons">
-      <auro-button onClick="closeDemo('#smMdDialog')">
-        I understand
-        <auro-icon category="interface" name="check-lg" emphasis onDark></auro-icon>
-      </auro-button>
-    </div>
-  </span>
+  <div slot="content">
+    <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+    <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+    <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+    <ul>
+      <li>Caerphilly croque monsieur fondue</li>
+      <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+      <li>Cheddar cheese and biscuits chalk and cheese</li>
+      <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+    </ul>
+  </div>
+  <div slot="footer" class="auro_containedButtons">
+    <auro-button onClick="toggleInterruption('#smMdDialog')">
+      I understand
+      <auro-icon category="interface" name="check-lg" emphasis onDark></auro-icon>
+    </auro-button>
+  </div>
 </auro-dialog>
 
 <auro-accordion lowProfile justifyRight>
@@ -288,38 +396,50 @@ See the following examples.
 
   ```html
   <div class="demo--inline exampleWrapper auro_containedButtons">
-    <auro-button onClick="fireDemo('#smLgDialog')">Open [sm lg] dialog</auro-button>
-    <auro-button onClick="fireDemo('#smMdDialog')">Open [md lg] dialog</auro-button>
+    <auro-button onClick="toggleInterruption('#smLgDialog')">Open [sm lg] dialog</auro-button>
+    <auro-button onClick="toggleInterruption('#smMdDialog')">Open [md lg] dialog</auro-button>
   </div>
 
   <auro-dialog id="smLgDialog" sm lg>
     <span slot="header">Small Modal Dialog</span>
-    <span slot="content">
-      <ContentExample />
-    </span>
-    <span slot="footer">
-      <div class="auro_containedButtons">
-        <auro-button onClick="closeDemo('#smLgDialog')">
-          I understand
-          <auro-icon category="interface" name="check-lg" emphasis onDark></auro-icon>
-        </auro-button>
-      </div>
-    </span>
+    <div slot="content">
+      <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+      <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+      <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+      <ul>
+        <li>Caerphilly croque monsieur fondue</li>
+        <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+        <li>Cheddar cheese and biscuits chalk and cheese</li>
+        <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+      </ul>
+    </div>
+    <div slot="footer" class="auro_containedButtons">
+      <auro-button onClick="toggleInterruption('#smLgDialog')">
+        I understand
+        <auro-icon category="interface" name="check-lg" emphasis onDark></auro-icon>
+      </auro-button>
+    </div>
   </auro-dialog>
 
   <auro-dialog id="smMdDialog" md lg>
     <span slot="header">Medium Modal Dialog</span>
-    <span slot="content">
-      <ContentExample />
-    </span>
-    <span slot="footer">
-      <div class="auro_containedButtons">
-        <auro-button onClick="closeDemo('#smMdDialog')">
-          I understand
-          <auro-icon category="interface" name="check-lg" emphasis onDark></auro-icon>
-        </auro-button>
-      </div>
-    </span>
+    <div slot="content">
+      <p>When traveling on Alaska Airlines flights, Alaska Airlines checked baggage fees may apply. See <auro-hyperlink href="https://www.alaskaair.com/bagrules" target="_blank">alaskaair.com/bagrules</auro-hyperlink> for our rules. For itineraries that include other airlines, their checked baggage fees may apply, as displayed on their websites.</p>
+      <p>Baggage rules and fees will be based on the specific itinerary chosen. The applicable first and second bag fees will be displayed after you have added flights to the cart.</p>
+      <auro-header level="3" display="500">Before checking your bags, remember to:</auro-header>
+      <ul>
+        <li>Caerphilly croque monsieur fondue</li>
+        <li>Taleggio goat mascarpone cow manchego cheese and wine emmental cheese strings</li>
+        <li>Cheddar cheese and biscuits chalk and cheese</li>
+        <li>Camembert de normandie stinking bishop bavarian bergkase</li>
+      </ul>
+    </div>
+    <div slot="footer" class="auro_containedButtons">
+      <auro-button onClick="toggleInterruption('#smMdDialog')">
+        I understand
+        <auro-icon category="interface" name="check-lg" emphasis onDark></auro-icon>
+      </auro-button>
+    </div>
   </auro-dialog>
 
   ```
@@ -335,23 +455,37 @@ This property can be used in combination of any other use case of the dialog, bu
 
 Part of the dialog design spec is its responsive padding. To take advantage of this for your content within the scope of the dialog, be sure to use the selector `unformattedWrapper` that can be imported from the package here:
 
-```
-import '@alaskaairux/auro-interruption/dist/style-blank.css'
+```scss
+import '@alaskaairux/auro-interruption/dist/style-unformatted.scss'
 ```
 
 ### Accessibility
 
 Within the scope of the auro-dialog there is `aria-labelledby="dialog-header"`. To make proper use of this, in an unformatted dialog, the developer is required to add `id="dialog-header"` to the content header within the dialog content.
 
-import '@alaskaairux/auro-interruption/dist/style-blank.css'
-
 <div class="demo--inline exampleWrapper auro_containedButtons">
-  <auro-button onClick="fireDemo('#unformattedMdDialog')">Unformatted Medium Dialog</auro-button>
+  <auro-button onClick="toggleInterruption('#unformattedMdDialog')">Unformatted Medium Dialog</auro-button>
 </div>
+
+<!--
+  This needs to be replaced with a link to the
+  remote when published.
+-->
+<style>
+  [unformatted] .unformattedWrapper{
+  padding:2rem;
+  padding:var(--auro-size-xl); }
+  @media screen and (min-width: 1024px){
+    [unformatted] .unformattedWrapper{
+      padding:4rem;
+      padding:var(--auro-size-xxxl);
+      padding-top:2rem;
+      padding-top:var(--auro-size-xl); } }
+</style>
 
 <auro-dialog id="unformattedMdDialog" unformatted md lg ondark>
   <span slot="content">
-    <img style={{display: "block", width: "100%"}} src="https://blog.alaskaair.com/wp-content/uploads/2020/11/111-psp-blog-img-guide.jpg" alt="alaska airlines pride lights" />
+    <img style="display: block; width: 100%" src="https://blog.alaskaair.com/wp-content/uploads/2020/11/111-psp-blog-img-guide.jpg" alt="alaska airlines pride lights" />
     <div class="unformattedWrapper">
       <h1 id="dialog-header">This is a header</h1>
       These are words that are slotted into the scope of the custom element.
@@ -363,19 +497,19 @@ import '@alaskaairux/auro-interruption/dist/style-blank.css'
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
-  ```html
-  import '@alaskaairux/auro-interruption/dist/style-blank.css'
+```html
+  <link rel="stylesheet" href="https://unpkg.com/.../dist/style-unformatted.css">
 
-  <auro-button onClick="fireDemo('#unformattedMdDialog')">Unformatted Medium Dialog</auro-button>
+  <auro-button onClick="toggleInterruption('#unformattedMdDialog')">Unformatted Medium Dialog</auro-button>
 
   <auro-dialog id="unformattedMdDialog" unformatted md lg ondark>
     <span slot="content">
-      <img style={{display: "block", width: "100%"}} src="https://blog.alaskaair.com/wp-content/uploads/2020/11/111-psp-blog-img-guide.jpg" alt="alaska airlines pride lights" />
+      <img style="display: block; width: 100%" src="https://blog.alaskaair.com/wp-content/uploads/2020/11/111-psp-blog-img-guide.jpg" alt="alaska airlines pride lights" />
       <div class="unformattedWrapper">
         <h1 id="dialog-header">This is a header</h1>
         These are words that are slotted into the scope of the custom element.
       </div>
     </span>
   </auro-dialog>
-  ```
+```
 </auro-accordion>

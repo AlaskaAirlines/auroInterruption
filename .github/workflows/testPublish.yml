@@ -28,6 +28,8 @@ jobs:
       - run: npm run postCss:component
       - run: npm run sassRender
       - run: npm run distJS
+      - run: npm run distCss
+      - run: npm run distScss
       - run: npm run bundler
       - run: npm test
 
@@ -48,6 +50,8 @@ jobs:
       - run: npm run postCss:component
       - run: npm run sassRender
       - run: npm run distJS
+      - run: npm run distCss
+      - run: npm run distScss
       - run: npm run bundler
       - uses: cycjimmy/semantic-release-action@v2
         env:
