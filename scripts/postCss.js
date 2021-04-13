@@ -23,3 +23,22 @@ fs.readFile('src/style.css', (err, css) => {
       }
     })
 })
+
+fs.readFile('src/style-unformatted.css', (err, css) => {
+  postcss([autoprefixer, postcssCustomProperties, comments])
+    .use(comments({
+      remove: function(comment) { return comment[0] == "@"; }
+    }))
+    .use(removeRules({
+      rulesToRemove: {
+        ':root': '*'
+      }
+    }))
+    .process(css, { from: 'src/style-unformatted.css', to: 'src/style-unformatted.css' })
+    .then(result => {
+      fs.writeFile('src/style-unformatted.css', result.css, () => true)
+      if ( result.map ) {
+        fs.writeFile('src/style-unformatted.map', result.map, () => true)
+      }
+    })
+})
