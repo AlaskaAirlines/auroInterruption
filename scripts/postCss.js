@@ -32,7 +32,7 @@ cssFiles.map(name => fs.readFile(`src/${name}.css`, (err, css) => {
 Output a "fixed" stylesheet that only contains declarations with rem units
 converted to their px equivalent.
 */
-const cssFixedFiles = ['style-fixed', 'style-unformatted-fixed']
+const cssFixedFiles = ['style-fixed', 'style-unformatted-fixed', 'style-drawer-fixed']
 
 cssFixedFiles.map(name => fs.readFile(`src/${name}.css`, (err, css) => {
   fs.readFile(`src/${name}.css`, (err, css) => {
