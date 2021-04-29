@@ -23,7 +23,5 @@ module.exports = postcss.plugin('remove-non-rem', function (opts) {
         rule.remove();
       }
     });
-
-    css.wa
   };
 });
