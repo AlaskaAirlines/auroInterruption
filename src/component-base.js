@@ -194,7 +194,8 @@ export default class ComponentBase extends LitElement {
     const classes = {
       'dialogOverlay': true,
       'dialogOverlay--modal': this.modal && this.open,
-      'dialogOverlay--open': this.open
+      'dialogOverlay--open': this.open,
+      'hidden': !this.open
     },
 
      contentClasses = {
