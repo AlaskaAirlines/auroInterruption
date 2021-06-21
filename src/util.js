@@ -1,3 +1,4 @@
+/* eslint-disable func-style */
 /**
  * Recursively traverses a node's siblings and makes them inert and aria-hidden so that
  * keyboard and screen reader focus is trapped within the dialog.
@@ -5,13 +6,18 @@
  * @returns {function} Cleanup function that removes inert and aria-hidden from the affected nodes.
  */
 export function makeSiblingsInert(node) {
-  const inertElements = [];
-  const hiddenElements = [];
+  const hiddenElements = [],
+    inertElements = [];
 
-  function handleInert(node) {
-    if (node.parentNode) {
-      for (const elem of node.parentNode.childNodes) {
-        if (elem !== node && elem.nodeType === Node.ELEMENT_NODE) {
+  /**
+   * Applies inert recursively to a node's siblings.
+   * @param {Element} currentNode The node whose siblings should be made inert
+   * @returns {void}
+   */
+  function handleInert(currentNode) {
+    if (currentNode.parentNode) {
+      for (const elem of currentNode.parentNode.childNodes) {
+        if (elem !== currentNode && elem.nodeType === Node.ELEMENT_NODE) {
           elem.inert = true;
           inertElements.push(elem);
 
@@ -21,17 +27,22 @@ export function makeSiblingsInert(node) {
           }
         }
       }
-      if (node.parentNode !== document.body) {
-        handleInert(node.parentNode);
+      if (currentNode.parentNode !== document.body) {
+        handleInert(currentNode.parentNode);
       }
     }
   }
 
+  /**
+   * Removes inert and aria-hidden from the affected nodes.
+   * @returns {void}
+   */
   function cleanupNodes() {
-    inertElements.forEach(el => el.removeAttribute('inert'));
-    hiddenElements.forEach(el => el.removeAttribute('aria-hidden'));
+    inertElements.forEach((el) => el.removeAttribute('inert'));
+    hiddenElements.forEach((el) => el.removeAttribute('aria-hidden'));
   }
 
   handleInert(node);
+
   return cleanupNodes;
 }
