@@ -31,13 +31,13 @@ const ESCAPE_KEYCODE = 27,
  * @attr {Boolean} md - Sets dialog box to medium style. Adding both md and lg will set the dialog to md for desktop and lg for mobile.
  * @attr {Boolean} onDark - Sets close icon to white for dark backgrounds
  * @attr {Boolean} open - Sets state of dialog to open
+ * @prop {HTMLElement} triggerElement - The element to focus when the dialog is closed. If not set, defaults to the value of document.activeElement when the dialog is opened.
  * @slot header - Text to display as the header of the modal
  * @slot content - Injects content into the body of the modal
  * @slot footer - Used for action options, e.g. buttons
  * @function toggleViewable - toggles the 'open' property on the element
  */
 
-// build the component class
 export default class ComponentBase extends LitElement {
   constructor() {
     super();
@@ -55,7 +55,6 @@ export default class ComponentBase extends LitElement {
     this._open = false;
   }
 
-  // function to define props used within the scope of this component
   static get properties() {
     return {
       modal: { type: Boolean },
@@ -63,11 +62,13 @@ export default class ComponentBase extends LitElement {
       open: {
         type: Boolean,
         reflect: true
+      },
+      triggerElement: {
+        attribute: false
       }
     };
   }
 
-  // This function removes a CSS selector if the footer slot is empty
   firstUpdated() {
     const slot = this.shadowRoot.querySelector("#footer"),
       slotWrapper = this.shadowRoot.querySelector("#footerWrapper");
@@ -108,11 +109,12 @@ export default class ComponentBase extends LitElement {
   }
 
   /**
-   * @private internal function
+   * @private
    * @returns {void}
    */
   openDialog() {
-    this.triggerElement = document.activeElement;
+    this.defaultTrigger = document.activeElement;
+
     setTimeout(() => {
       this.focus();
       this.cleanupInertNodes = makeSiblingsInert(this);
@@ -120,7 +122,7 @@ export default class ComponentBase extends LitElement {
   }
 
   /**
-   * @private internal function
+   * @private
    * @returns {void}
    */
   closeDialog() {
@@ -128,12 +130,14 @@ export default class ComponentBase extends LitElement {
     this.cleanupInertNodes();
     // Wait for the inert polyfill to react to the DOM change
     Promise.resolve().then(() => {
-      this.triggerElement.focus()
+      const elementToFocus = this.triggerElement || this.defaultTrigger;
+
+      elementToFocus.focus();
     });
   }
 
   /**
-   * @private internal function
+   * @private
    * @returns {void}
    */
   dispatchToggleEvent() {
@@ -145,7 +149,7 @@ export default class ComponentBase extends LitElement {
   }
 
   /**
-   * @private internal function
+   * @private
    * @returns {void}
    */
   handleOverlayClick() {
@@ -155,7 +159,7 @@ export default class ComponentBase extends LitElement {
   }
 
   /**
-   * @private internal function
+   * @private
    * @returns {void}
    */
   handleCloseButtonClick() {
@@ -163,7 +167,7 @@ export default class ComponentBase extends LitElement {
   }
 
   /**
-   * @private internal function
+   * @private
    * @returns {void}
    */
   handleKeydown({ key, keyCode }) {
@@ -173,7 +177,7 @@ export default class ComponentBase extends LitElement {
   }
 
   /**
-   * @private internal function
+   * @private
    * Focus the dialog.
    * @returns {void}
    */
@@ -192,7 +196,7 @@ export default class ComponentBase extends LitElement {
   }
 
   /**
-   * @private internal function
+   * @private
    * @returns {TemplateResult} the close button template
    */
   getCloseButton() {
@@ -206,7 +210,6 @@ export default class ComponentBase extends LitElement {
       `
   }
 
-  // function that renders the HTML and CSS into  the scope of the component
   render() {
     const classes = {
         'dialogOverlay': true,

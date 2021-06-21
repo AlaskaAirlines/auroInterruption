@@ -1,8 +1,8 @@
 import { fixture, html, expect, oneEvent } from '@open-wc/testing';
-import sinon from 'sinon';
 import '../src/auro-dialog.js';
 import '../src/auro-drawer.js';
 import './test-button.js';
+import './nested-shadow.js';
 
 describe('auro-dialog', () => {
   it('auro-dialog is accessible', async () => {
@@ -210,6 +210,27 @@ describe('auro-drawer', () => {
 
     el.open = false;
     await oneEvent(el, 'toggle');
+  });
+
+  it('handles focus on nested shadow roots', async () => {
+    const el = await fixture(html`
+      <nested-shadow></nested-shadow>
+    `);
+
+    const button = el.shadowRoot.querySelector('button');
+    const dialog = el.shadowRoot.querySelector('auro-dialog');
+
+    button.focus();
+    button.click();
+    await el.updated;
+    await sleep(100);
+
+    dialog.open = false;
+    await el.updated;
+    await sleep(100);
+    
+    expect(document.activeElement).to.equal(el);
+    expect(el.shadowRoot.activeElement).to.equal(button);
   });
 });
 

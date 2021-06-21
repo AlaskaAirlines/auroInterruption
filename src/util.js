@@ -2,7 +2,7 @@
 /**
  * Recursively traverses a node's siblings and makes them inert and aria-hidden so that
  * keyboard and screen reader focus is trapped within the dialog.
- * @param {*} node The node whose siblings should be made inert
+ * @param {Element} node The node whose siblings should be made inert
  * @returns {function} Cleanup function that removes inert and aria-hidden from the affected nodes.
  */
 export function makeSiblingsInert(node) {
@@ -38,7 +38,9 @@ export function makeSiblingsInert(node) {
    * @returns {void}
    */
   function cleanupNodes() {
-    inertElements.forEach((el) => el.removeAttribute('inert'));
+    inertElements.forEach((el) => {
+      el.inert = false;
+    });
     hiddenElements.forEach((el) => el.removeAttribute('aria-hidden'));
   }
 
